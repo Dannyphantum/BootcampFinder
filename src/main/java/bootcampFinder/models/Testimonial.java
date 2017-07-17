@@ -1,5 +1,6 @@
 package bootcampFinder.models;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -7,8 +8,11 @@ import javax.persistence.Id;
 /**
  * Created by student on 7/17/17.
  */
+@Entity
 public class Testimonial {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
 
     private String message;
