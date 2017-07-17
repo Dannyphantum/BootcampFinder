@@ -1,4 +1,4 @@
-package Configurations;
+package bootcampFInder.configurations;
 
 
 import org.springframework.context.annotation.Bean;
