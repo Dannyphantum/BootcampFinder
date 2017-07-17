@@ -10,7 +10,6 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "userData")
 public class User {
 
 
