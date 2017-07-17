@@ -1,0 +1,11 @@
+SQL Linux Scripts
+-----------------------
+
+mysql> create database bootcamp;
+Query OK, 1 row affected (0.00 sec)
+
+mysql> create user 'campUser'@'localhost' identified by 'FinalProject';
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> grant all on bootcamp.* to 'campUser'@'localhost';
+Query OK, 0 rows affected (0.00 sec)
