@@ -18,4 +18,9 @@ public class HomeController {
         return "registration";
     }
 
+    @RequestMapping("/search")
+    public String gosearch(){
+        return "base";
+    }
+
 }
