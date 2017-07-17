@@ -1,6 +1,6 @@
-package bootcampFInder.controller;
+package bootcampFinder.controller;
 
-import bootcampFInder.models.User;
+import bootcampFinder.models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;

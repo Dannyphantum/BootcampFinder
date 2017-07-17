@@ -1,4 +1,4 @@
-package bootcampFInder;
+package bootcampFinder;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
