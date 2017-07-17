@@ -1,4 +1,4 @@
-package bootcampFInder.models;
+package bootcampFinder.models;
 
 /**
  * Created by student on 7/17/17.

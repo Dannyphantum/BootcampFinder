@@ -1,4 +1,4 @@
-package bootcampFInder.models;
+package bootcampFinder.models;
 
 import javax.persistence.*;
 import java.util.Set;
