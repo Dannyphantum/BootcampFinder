@@ -14,6 +14,12 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+        <style>
+            #demo { text-align: center;
+                    font-family: "Helvetica Neue", "Open Sans", Arial, sans-serif}
+            #copyright{ text-align: center;
+                font-family: "Helvetica Neue", "Open Sans", Arial, sans-serif}
+        </style>
     </th:block>
     <title>Bootcamp Finder</title>
 </head>
@@ -79,12 +85,16 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    <p id="demo"></p>
 
+    <p id = "copyright"> &copy; Beta Group </p>
+    <p id="demo"></p>
+<a href ="/">Home</a>
     <script>
         var d = new Date();
         document.getElementById("demo").innerHTML = d.toDateString();
+
     </script>
+
 </th:block>
 
 
