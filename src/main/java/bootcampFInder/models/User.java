@@ -1,4 +1,4 @@
-package models;
+package bootcampFInder.models;
 
 /**
  * Created by student on 7/17/17.
@@ -7,8 +7,6 @@ package models;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
-
-import models.Role;
 
 
 @Entity

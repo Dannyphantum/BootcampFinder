@@ -1,4 +1,4 @@
-package models;
+package bootcampFInder.models;
 
 import javax.persistence.*;
 import java.util.Set;
