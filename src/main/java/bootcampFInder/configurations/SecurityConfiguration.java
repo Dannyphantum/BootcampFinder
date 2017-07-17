@@ -3,11 +3,14 @@ package bootcampFInder.configurations;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.util.AntPathMatcher;
 
 /**
@@ -28,23 +31,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     }
 
     @Override
-    protected void configure(HttpsSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception {
 
         http
                 .authorizeRequests().anyRequest().authenticated();
 
-        http
-                .antMatchers("/","/login","/search").permitAll()
-                .loginPage("/login")
+        http    .authorizeRequests()
+                .antMatchers("/","/login","/registration").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .formLogin().loginPage("/login")
                 .defaultSuccessUrl("/home")
-                .and
-                .logout().logoutRequestMatcher(new AntPathMatcher("/logout"))
+                .and()
+                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 .logoutSuccessUrl("/")
                 .permitAll();
     }
 
     @Override
-    protected void configure(AuthencationManagerBuilder auth)throws Exception
+    protected void configure(AuthenticationManagerBuilder auth)throws Exception
     {
         auth.inMemoryAuthentication()
                 .withUser("user").password("password").roles("USER")
