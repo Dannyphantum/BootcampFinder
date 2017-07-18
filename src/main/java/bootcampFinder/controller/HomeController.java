@@ -84,7 +84,7 @@ public class HomeController {
 
     @RequestMapping("/saveCamp")
     public String saveCamp(Bootcamp bootcamp) {
-        appRepository.save(bootcamp);
+        bootcampRepository.save(bootcamp);
         return "redirect:/";
     }
 
