@@ -1,10 +1,6 @@
 <!DOCTYPE html>  <!-- req: new User() "user" submit to "/register" -->
 <html lang="en" xmlns:th="www.thymeleaf.org " xmlns:sec="www.thymeleaf.org/extras/spring-security">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>New User Registration</title>
     <th:block th:replace="base :: head"></th:block>
 </head>
 <body>
@@ -17,20 +13,25 @@
 </div>
 
 <div class="container">
-
     <br/><br/>
     <div class="well">
         <form th:object="${user}" method="POST" th:action="@{/register}">
-
             <div class="row">
 
+                <!-- validate -->
+                <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email error</span>
+                <span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">userName error</span>
+                <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password error</span>
+                <!-- validate -->
+
                 <!-- user info -->
-                <span class="col-md-4"> <input type="text" class="form-control" th:field="*{fullName}" placeholder="full name"/><br/><br/></span>
-                <span class="col-md-4"> <input type="text" class="form-control" th:field="*{username}" placeholder="username"/><br/><br/></span>
-                <span class="col-md-4"> <input type="email" class="form-control" th:field="*{email}" placeholder="email"/><br/><br/></span>
-                <span class="col-md-4"> <input type="text" class="form-control" th:field="*{city}" placeholder="city"/><br/><br/></span>
-                <span class="col-md-4"> <input type="text" class="form-control" th:field="*{state}" placeholder="state"/><br/><br/></span>
-                <span class="col-md-4"> <input type="text" class="form-control" th:field="*{street}" placeholder="street name"/><br/><br/></span>
+                <span class="col-md-4"><input type="text" class="form-control" th:field="*{fullName}" placeholder="full name"/><br/><br/></span>
+                <span class="col-md-4"><input type="text" class="form-control" th:field="*{userName}" placeholder="username"/><br/><br/></span>
+                <span class="col-md-4"><input type="email" class="form-control" th:field="*{email}" placeholder="email"/><br/><br/></span>
+                <span class="col-md-4"><input type="text" class="form-control" th:field="*{city}" placeholder="city"/><br/><br/></span>
+                <span class="col-md-4"><input type="text" class="form-control" th:field="*{state}" placeholder="state"/><br/><br/></span>
+                <span class="col-md-4"><input type="text" class="form-control" th:field="*{street}" placeholder="street name"/><br/><br/></span>
+                <span class="col-md-4"><input type="number" class="form-control" th:field="*{zip}" placeholder="zip"/><br/><br/></span>
                 <!-- user info -->
 
                 <!-- password -->
@@ -41,28 +42,28 @@
                 <span class="col-md-4">
                     <center>
                         <h6>
-                            <strong>what are you? </strong> &nbsp;&nbsp;
-                            director<input type="radio" id="director"/>&nbsp;&nbsp;
-                            student<input type="radio" id="student"/>&nbsp;&nbsp;
+                            <strong><u>what are you?</u></strong> <br/><br/>
+                            <input type="radio" id="director" name="role" value="director" th:field="*{role}"/>&nbsp;director&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" id="student" name="role" value="student" th:field="*{role}"/>&nbsp;student&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </h6>
                     </center>
                 </span><br/><br/>
                 <!-- role picker -->
 
                 <!-- submit -->
-                <input type="submit" class="col-md-4 btn btn-lg btn-primary" value="register"/><br/><br/>
+                <span class="col-md-12">
+                    <br/>
+                    <input type="submit" class="btn btn-lg btn-primary btn-block" value="register"/>
+                </span>
                 <!-- submit -->
 
-            </div>
-        </form>
-    </div>
-    <script>
-        //check students role picker by default
-        document.getElementById('student').checked = true;
-    </script>
-
-</div>
-
-
+            </div><!-- row -->
+        </form><!-- form -->
+    </div><!-- well -->
+</div><!-- container -->
+<script>
+    //check students role picker by default
+    document.getElementById('student').checked = true;
+</script>
 </body>
 </html>

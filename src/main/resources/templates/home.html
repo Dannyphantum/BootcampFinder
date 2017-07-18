@@ -1,14 +1,60 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!-- req: list of message "messages", user with user info "activeUser" -->
 <html lang="en" xmlns:th="www.thymeleaf.org " xmlns:sec="www.thymeleaf.org/extras/spring-security" >
 <head>
-    <meta charset="UTF-8">
-    <title>BootCamp Finder Home</title>
     <th:block th:replace="base :: head">head error</th:block>
 </head>
 <body>
 <th:block th:replace="base :: navbar">nav error</th:block>
 <div class="container">
 
+    <div class="row">
+
+        <!-- profile -->
+        <div class="col-md-3">
+            <div class="well">
+                <p th:text="${activeUser.fullName}">full name error</p>
+                <p th:text="${activeUser.userName}">username error</p>
+                <p th:text="${activeUser.email}">username error</p>
+                <p>
+                    <th:block th:text="${activeUser.street}">street error</th:block>
+                    <th:block th:text="${activeUser.city}">city error</th:block>
+                    <th:block th:text="${activeUser.state}">state error</th:block>
+                </p>
+            </div>
+
+            <div class="well">
+
+                <table class="table table-striped">
+
+                    <thead>
+                        <th>sender</th>
+                        <th>title</th>
+                        <th>view</th>
+                    </thead>
+
+                    <th:block th:each="message : ${messages}">
+                        <tr>
+                            <td th:text="${message.sender}">sender error</td>
+                            <td th:text="${message.title}">title error</td>
+                            <td>
+                                <a th:href="@{'/viewMessage/' + ${message.id}">
+                                    <button class="btn btn-xs btn-info">view</button>
+                                </a>
+                            </td>
+                        </tr>
+                    </th:block>
+                    <tr>
+                        <td>-end-</td>
+                        <td>-end-</td>
+                        <td>-end-</td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+        <!-- profile -->
+
+    </div>
 
 </div>
 
