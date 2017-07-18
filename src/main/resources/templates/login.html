@@ -16,6 +16,15 @@
     <div class="well">
         <form method="POST" th:action="@{/login}">
 
+            <!-- validate -->
+            <div th:if="${param.error}">
+                Invalid username and password.
+            </div>
+            <div th:if="${param.logout}">
+                You have been logged out.
+            </div>
+            <!-- validate -->
+
             <!-- inputs -->
             <input type="text" class="form-control" name="username" placeholder="username"/> <br/><br/>
             <input type="password" class="form-control" name="password" placeholder="password"/><br/><br/>

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @Controller
 public class HomeController {
@@ -36,13 +37,22 @@ public class HomeController {
     }
 
     @RequestMapping("/")
-    public String home(Model model, Authentication authentication) {
-        User user = getUser(authentication);
+    public String home(Model model, Principal principal) {
+        User user = userRepository.findOneByUserName(principal.getName());
         model.addAttribute("user", user);
-        if (appRepository.existsByUserId(user.getUserId()))
-            model.addAttribute("app", appRepository.findOneByUserId(user.getUserId()));
-        else model.addAttribute("app", new App());
-        model.addAttribute("messages", messageRepository.findAllByRecieverId(user.getUserId()));
+
+        System.out.println(user.getUserName());
+        System.out.println(user.getPassword());
+
+        //if (user.getRole().equals("student")) {
+            if (appRepository.existsByUserId(user.getUserId()))
+                model.addAttribute("app", appRepository.findOneByUserId(user.getUserId()));
+            else model.addAttribute("app", new App());
+        //} else if (user.getRole().equals("director")) {
+            //do nothing
+        //}
+
+        //model.addAttribute("messages", messageRepository.findAllByRecieverId(user.getUserId()));
         return "home";
     }
 /*

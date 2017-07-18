@@ -22,7 +22,7 @@ import java.util.Set;
 @Service
 public class SSUserDetailsService implements UserDetailsService {
 
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     public SSUserDetailsService (UserRepository userRepository) {
         this.userRepository  = userRepository;

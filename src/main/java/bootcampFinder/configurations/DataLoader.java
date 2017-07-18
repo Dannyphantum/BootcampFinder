@@ -28,8 +28,8 @@ public class DataLoader implements CommandLineRunner{
 
     @Override
     public void run(String... strings) throws Exception {
+/*
 
-        /*
         //only do if database hasn't been built yet
         //if (!roleRepository.existsByRole("ADMIN")) {
 

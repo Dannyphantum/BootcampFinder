@@ -51,7 +51,6 @@
                     </tr>
                 </table>
             </div>
-
         </div>
         <!-- profile -->
 
@@ -61,9 +60,9 @@
             <th:block sec:authorize="student"> <!-- fix this -->
                 <div class="well">
                     <form th:object="${app}" method="POST" action="/saveApp">
-                        <input type="text" class="form-control" name="degree" th:value="${application.degree}" placeholder="degree"/>
-                        <input type="text" class="form-control" name="skills" th:value="${application.skills}" placeholder="skills"/>
-                        <input type="number" class="form-control" name="yrsExperience" th:value="${application.yrsExperience}" placeholder="years experience"/>
+                        <input type="text" class="form-control" name="degree" th:value="${app.degree}" placeholder="degree"/>
+                        <input type="text" class="form-control" name="skills" th:value="${app.skills}" placeholder="skills"/>
+                        <input type="number" class="form-control" name="yrsExperience" th:value="${app.yrsExperience}" placeholder="years experience"/>
 
                         <input type="hidden" name="userId" class="form-control" th:value="${user.userId}"/>
                         <input type="submit" value="save" class="btn btn-success btn-block"/>
