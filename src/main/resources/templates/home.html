@@ -54,6 +54,25 @@
         </div>
         <!-- profile -->
 
+        <div class="col-md-9">
+            <!-- student application -->
+            <th:block sec:authorize="student"> <!-- fix this -->
+                <div class="well">
+                    <form th:object="${applicationn}" method="POST" action="/saveApp">
+                        <input type="number" class="form-control" th:field="*{experience}"/>
+                        <input type="text" class="form-control" th:field="*{degree}"/>
+                        <input type="text" class="form-control" th:field="*{skills}"/>
+                        <input type="hidden" name="userId" class="form-control" th:value="${activeUser.id}"/>
+                        <input type="submit" value="save" class="form-control btn btn-success"/>
+                    </form>
+                </div>
+            </th:block>
+            <!-- student application -->
+
+
+
+        </div>
+
     </div>
 
 </div>
