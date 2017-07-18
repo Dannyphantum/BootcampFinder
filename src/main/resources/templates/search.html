@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head th:replace="base :: eliana">
+    <meta charset="UTF-8" />
+    <title>Title</title>
+</head>
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <nav class="navbar navbar-default" th:replace="base::mena"> </nav>
+
+<form th:action="@{/search}" th:object="${custom}" method="post">
+    <input type="text" th:field="*{zipCode}" />
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+    </div>
+</div>
+</body>
+</html>
