@@ -17,7 +17,7 @@ public class App {
 
     private String skills;
 
-    private int yrsExperience;
+    private String yrsExperience;
 
     private long userId;
 
@@ -46,11 +46,11 @@ public class App {
         this.skills = skills;
     }
 
-    public int getYrsExperience() {
+    public String getYrsExperience() {
         return yrsExperience;
     }
 
-    public void setYrsExperience(int yrsExperience) {
+    public void setYrsExperience(String yrsExperience) {
         this.yrsExperience = yrsExperience;
     }
 

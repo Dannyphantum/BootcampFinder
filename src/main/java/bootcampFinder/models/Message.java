@@ -21,7 +21,7 @@ public class Message{
 
     private String content;
 
-    private String recieverId;
+    private long recieverId;
 
     public long getId() {
         return id;
@@ -55,11 +55,11 @@ public class Message{
         this.content = content;
     }
 
-    public String getRecieverId() {
+    public long getRecieverId() {
         return recieverId;
     }
 
-    public void setRecieverId(String recieverId) {
+    public void setRecieverId(long recieverId) {
         this.recieverId = recieverId;
     }
 }

@@ -38,7 +38,7 @@ public class User {
     private String state;
 
     @Column(name = "zipcode")
-    private long zip;
+    private String zip;
 
     @Column(name = "enabled")
     private boolean enabled;
@@ -54,7 +54,7 @@ public class User {
     private Collection<Role> roles;
 
     public User(String fullName, String userName, String email, String password, String street
-            , String city, String state, long zip, boolean enabled, Date userDate) {
+            , String city, String state, String zip, boolean enabled, Date userDate) {
         this.fullName = fullName;   this.userName = userName;   this.email = email;
         this.password = password;   this.street = street;       this.city = city;
         this.state = state;         this.zip = zip;             this.enabled = enabled;
@@ -135,11 +135,11 @@ public class User {
         this.state = state;
     }
 
-    public long getZip() {
+    public String getZip() {
         return zip;
     }
 
-    public void setZip(long zip) {
+    public void setZip(String zip) {
         this.zip = zip;
     }
 
