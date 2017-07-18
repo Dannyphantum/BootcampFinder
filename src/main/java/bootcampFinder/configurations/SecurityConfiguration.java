@@ -33,28 +33,28 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                .authorizeRequests().anyRequest().authenticated();
-
-        http    .authorizeRequests()
-
-                .antMatchers("/","/login","/registration").permitAll()
+                .csrf().disable();
+        http
+                .authorizeRequests()
+                .antMatchers("/","/login","/register").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login")
-                .defaultSuccessUrl("/home")
+                .formLogin().loginPage("/login").permitAll()
                 .and()
-                .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/")
-                .permitAll();
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/login").permitAll().permitAll()
+                .and()
+                .httpBasic();
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth)throws Exception
     {
-        auth.inMemoryAuthentication()
+       /* auth.inMemoryAuthentication()
                 .withUser("user").password("password").roles("USER")
                 .and()
-                .withUser("root").password("password").roles("ADMIN");
+                .withUser("root").password("password").roles("ADMIN");*/
         auth
                 .userDetailsService(userDetailsServiceBean())
                 .passwordEncoder(encoder());

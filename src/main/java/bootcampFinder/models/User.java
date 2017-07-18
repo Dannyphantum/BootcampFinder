@@ -22,7 +22,7 @@ public class User {
     @Column(name = "username")
     private String userName;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email")
     private String email;
 
     @Column(name = "password")
@@ -46,16 +46,30 @@ public class User {
     @Column(name = "user_date")
     private Date userDate = new Date();
 
+    @Column(name = "user_role")
+    private String role;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
-    public User(String fullName, String userName, String email, String password, String street, String city, String state, long zip, boolean enabled, Date userDate) {
+    public User(String fullName, String userName, String email, String password, String street
+            , String city, String state, long zip, boolean enabled, Date userDate) {
         this.fullName = fullName;   this.userName = userName;   this.email = email;
         this.password = password;   this.street = street;       this.city = city;
         this.state = state;         this.zip = zip;             this.enabled = enabled;
         this.userDate = userDate;
-    }public User(){}
+    }
+    public User(){}
+
+    public String getRole() {
+        return role;
+    }
+
+    public User setRole(String role) {
+        this.role = role;
+        return this;
+    }
 
     public long getUserId() {
         return userId;
@@ -152,6 +166,5 @@ public class User {
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
     }
-
 
 }
