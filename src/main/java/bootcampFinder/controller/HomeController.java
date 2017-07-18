@@ -40,9 +40,9 @@ public class HomeController {
         User user = getUser(authentication);
         model.addAttribute("user", user);
         if (appRepository.existsByUserId(user.getUserId()))
-            model.addAttribute("application", appRepository.findOneByUserId(user.getUserId()));
-        else model.addAttribute("application", new App());
-        //model.addAttribute("messages", messageRepository.findAllByRecieverId(user.getUserId()));
+            model.addAttribute("app", appRepository.findOneByUserId(user.getUserId()));
+        else model.addAttribute("app", new App());
+        model.addAttribute("messages", messageRepository.findAllByRecieverId(user.getUserId()));
         return "home";
     }
 /*
