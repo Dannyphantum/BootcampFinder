@@ -3,8 +3,10 @@ package bootcampFinder.controller;
 import bootcampFinder.configurations.UserService;
 import bootcampFinder.configurations.UserValidator;
 import bootcampFinder.models.App;
+import bootcampFinder.models.Bootcamp;
 import bootcampFinder.models.User;
 import bootcampFinder.repositories.*;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,16 +16,23 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class HomeController {
 
-    private AppRepository appRepository;                    private BootcampRepository bootcampRepository;
+    private AppRepository appRepository;
     private MessageRepository messageRepository;            private RoleRepository roleRepository;
     private TestimonialRepository testimonialRepository;    private UserRepository userRepository;
     private UserValidator userValidator;                    private UserService userService;
+
+
+    @Autowired
+    private BootcampRepository bootcampRepository;
 
     @Autowired
     public HomeController(AppRepository appRepository, BootcampRepository bootcampRepository
@@ -57,14 +66,27 @@ public class HomeController {
     model.addAttribute("action", "login");
     return "login";
 }
+@RequestMapping(value = "/search", method = RequestMethod.GET)
+public String newSearch(Model model){
+        model.addAttribute("bootcamp",new Bootcamp());
+        return "search";
+}
 
-    @RequestMapping("/search")
-    public String gosearch(){
-        return "base";
+@RequestMapping(value = "/search", method = RequestMethod.POST)
+    public String searchPost(@RequestParam("zipCode") Long zipcode, @ModelAttribute Bootcamp bootcamp, Model model){
+long   min=zipcode -100;
+long   max = zipcode+100;
+      /*  long min = bootcamp.getZipCode() - 1;
+        long max = bootcamp.getZipCode() + 1;*/
+        List<Bootcamp> zipList = new ArrayList<>();
+
+        for(long i=min;i<=max;i++){
+            List<Bootcamp> custList = bootcampRepository.findByZipCode(i);
+            zipList.addAll(custList);
+        }
+        model.addAttribute("NewZipList",zipList);
+        return "searchdisplay";
     }
-
-
-
 
 
     @RequestMapping(value="/register", method = RequestMethod.GET)
