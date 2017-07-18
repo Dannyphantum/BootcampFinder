@@ -2,10 +2,12 @@ package bootcampFinder.controller;
 
 import bootcampFinder.configurations.UserService;
 import bootcampFinder.configurations.UserValidator;
-import bootcampFinder.models.Testimonial;
+import bootcampFinder.models.App;
 import bootcampFinder.models.User;
 import bootcampFinder.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,35 +16,47 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
-import java.util.concurrent.locks.StampedLock;
 
 @Controller
 public class HomeController {
 
-    private ApplicationRepository applicationRepository;    private BootcampRepository bootcampRepository;
+    private AppRepository appRepository;                    private BootcampRepository bootcampRepository;
     private MessageRepository messageRepository;            private RoleRepository roleRepository;
     private TestimonialRepository testimonialRepository;    private UserRepository userRepository;
     private UserValidator userValidator;                    private UserService userService;
 
     @Autowired
-    public HomeController(ApplicationRepository applicationRepository, BootcampRepository bootcampRepository
+    public HomeController(AppRepository appRepository, BootcampRepository bootcampRepository
             , MessageRepository messageRepository, UserService userService, RoleRepository roleRepository
             , TestimonialRepository testimonialRepository, UserRepository userRepository, UserValidator userValidator) {
-        this.applicationRepository = applicationRepository; this.bootcampRepository = bootcampRepository;
+        this.appRepository = appRepository;                 this.bootcampRepository = bootcampRepository;
         this.messageRepository = messageRepository;         this.roleRepository = roleRepository;
         this.testimonialRepository = testimonialRepository; this.userRepository = userRepository;
         this.userValidator = userValidator;                 this.userService = userService;
     }
 
-    @RequestMapping("/")//TODO: change this to return home
-    public String index() {
+    @RequestMapping("/")
+    public String home(Model model, Authentication authentication) {
+        User user = getUser(authentication);
+        model.addAttribute("user", user);
+        if (appRepository.existsByUserId(user.getUserId()))
+            model.addAttribute("application", appRepository.findOneByUserId(user.getUserId()));
+        else model.addAttribute("application", new App());
+        //model.addAttribute("messages", messageRepository.findAllByRecieverId(user.getUserId()));
+        return "home";
+    }
+/*
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    public String getlogin(Model model) {
+        model.addAttribute("action", "login");
         return "login";
     }
-
+*/
     @RequestMapping("/login")
-    public String login() {
-        return "login";
-    }
+    public String login(Model model) {
+    model.addAttribute("action", "login");
+    return "login";
+}
 
     @RequestMapping("/search")
     public String gosearch(){
@@ -77,7 +91,9 @@ public class HomeController {
 
 
 
-
-
+    private User getUser(Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        return userRepository.findOneByUserName(userDetails.getUsername());
+    }
 
 }

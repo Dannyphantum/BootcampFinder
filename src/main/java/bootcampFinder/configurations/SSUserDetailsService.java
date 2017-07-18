@@ -12,14 +12,17 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
 @Transactional
+@Service
 public class SSUserDetailsService implements UserDetailsService {
 
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     public SSUserDetailsService (UserRepository userRepository) {
         this.userRepository  = userRepository;
@@ -38,7 +41,7 @@ public class SSUserDetailsService implements UserDetailsService {
     }
 
     private Set<GrantedAuthority> getAuthorities(User user) {
-        Set<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
+        Set<GrantedAuthority> authorities = new HashSet<>();
         for(Role role : user.getRoles())
             authorities.add(new SimpleGrantedAuthority(role.getRole()));
         return authorities;
