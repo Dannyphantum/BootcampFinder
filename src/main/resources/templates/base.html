@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org " xmlns:sec="www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org " xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <th:block th:fragment = "head">
         <meta charset="UTF-8"/>
@@ -15,9 +15,11 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <style>
-            #demo { text-align: center;
+            #demo { font-size:20pt; text-align: center;
                 font-family: "Helvetica Neue", "Open Sans", Arial, sans-serif}
-            #copyright{ text-align: center;
+            #copyright{font-size:20pt; text-align: center;
+                font-family: "Helvetica Neue", "Open Sans", Arial, sans-serif}
+            #link{font-size:20pt; text-align: center;
                 font-family: "Helvetica Neue", "Open Sans", Arial, sans-serif}
 
         </style>
@@ -54,7 +56,7 @@
 
                             <li><a href="/logout" sec:authorize="isAuthenticated()"><h3>Logout</h3></a></li>
 
-                                <li><a href="/search" sec:authorize="hasAuthority('STUDENT')"><h3>Search</h3></a></li>
+                                <li><a href="/search" ><h3>Search</h3></a></li>
 
 
                     </ul>
@@ -79,7 +81,7 @@
 
     <p id ="copyright"> &copy; Beta Group </p>
     <p id="demo"></p>
-<a href ="/">Home</a>
+<p id = "link"><a href ="/">Home</a></p>
     <script>
         var d = new Date();
         document.getElementById("demo").innerHTML = d.toDateString();
