@@ -3,6 +3,7 @@ package bootcampFinder.controller;
 import bootcampFinder.configurations.UserService;
 import bootcampFinder.configurations.UserValidator;
 import bootcampFinder.models.App;
+import bootcampFinder.models.Bootcamp;
 import bootcampFinder.models.User;
 import bootcampFinder.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,15 +45,17 @@ public class HomeController {
         System.out.println(user.getUserName());
         System.out.println(user.getPassword());
 
-        //if (user.getRole().equals("student")) {
+        if (user.getRole().equals("student")) {
             if (appRepository.existsByUserId(user.getUserId()))
                 model.addAttribute("app", appRepository.findOneByUserId(user.getUserId()));
             else model.addAttribute("app", new App());
-        //} else if (user.getRole().equals("director")) {
-            //do nothing
-        //}
+        } else if (user.getRole().equals("director")) {
+            if (bootcampRepository.existsByBootcampDirector(user.getUserName()))
+                model.addAttribute("camp", bootcampRepository.findOneByBootcampDirector(user.getUserName()));
+            else model.addAttribute("camp", new Bootcamp());
+        }
 
-        //model.addAttribute("messages", messageRepository.findAllByRecieverId(user.getUserId()));
+        model.addAttribute("messages", messageRepository.findAllByRecieverId(user.getUserId()));
         return "home";
     }
 /*
@@ -73,7 +76,17 @@ public class HomeController {
         return "base";
     }
 
+    @RequestMapping("/saveApp")
+    public String saveApp(App app) {
+        appRepository.save(app);
+        return "redirect:/";
+    }
 
+    @RequestMapping("/saveCamp")
+    public String saveCamp(Bootcamp bootcamp) {
+        appRepository.save(bootcamp);
+        return "redirect:/";
+    }
 
 
 

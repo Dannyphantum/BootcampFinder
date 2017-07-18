@@ -57,7 +57,7 @@
 
         <div class="col-md-8">
             <!-- student application -->
-            <th:block sec:authorize="student"> <!-- fix this -->
+            <th:block sec:authorize="hasAuthority('STUDENT')">
                 <div class="well">
                     <form th:object="${app}" method="POST" action="/saveApp">
                         <input type="text" class="form-control" name="degree" th:value="${app.degree}" placeholder="degree"/>
@@ -70,9 +70,25 @@
                 </div>
             </th:block>
             <!-- student application -->
+            <th:block sec:authorize="hasAuthority('DIRECTOR')">
 
+                <div class="well">
+                    <form th:object="${camp}" method="POST" action="/saveCamp">
+                        <input type="text" class="form-control" name="bootcampName" th:value="${camp.bootcampName}" placeholder="camp name"/>
+                        <input type="text" class="form-control" name="streetAddress" th:value="${camp.streetAddress}" placeholder="street"/>
+                        <input type="text" class="form-control" name="state" th:value="${camp.state}" placeholder="state"/>
+                        <input type="text" class="form-control" name="city" th:value="${camp.city}" placeholder="city"/>
+                        <input type="number" class="form-control" name="zipCode" th:value="${camp.zipCode}" placeholder="zipCode"/>
+                        <input type="text" class="form-control" name="topics" th:value="${camp.topics}" placeholder="topics"/>
+                        <input type="text" class="form-control" name="description" th:value="${camp.description}" placeholder="description"/>
 
+                        <input type="hidden" name="bootcampDirector" class="form-control" th:value="${user.userName}"/>
 
+                        <input type="submit" value="save" class="btn btn-success btn-block"/>
+                    </form>
+                </div>
+
+            </th:block>
         </div>
 
     </div>

@@ -8,4 +8,6 @@ import bootcampFinder.models.Bootcamp;
 import org.springframework.data.repository.CrudRepository;
 
 public interface BootcampRepository extends CrudRepository<Bootcamp, Long> {
+    boolean existsByBootcampDirector(String userName);
+    Bootcamp findOneByBootcampDirector(String userName);
 }
