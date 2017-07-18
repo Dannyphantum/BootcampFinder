@@ -23,6 +23,8 @@ public class Bootcamp {
 
     private String city;
 
+    private long zipCode;
+
     private String topics;
 
     private String description;
@@ -67,6 +69,14 @@ public class Bootcamp {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public long getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(long zipcode) {
+        this.zipCode = zipCode;
     }
 
     public String getTopics() {
