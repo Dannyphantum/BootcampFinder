@@ -11,4 +11,5 @@ import java.util.List;
 
 public interface BootcampRepository extends CrudRepository<Bootcamp, Long> {
     List<Bootcamp> findByZipCode(long zip);
+    List<Bootcamp> findByBootcampId(long id);
 }
