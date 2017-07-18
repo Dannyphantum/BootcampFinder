@@ -43,8 +43,8 @@ public class HomeController {
         User user = userRepository.findOneByUserName(principal.getName());
         model.addAttribute("user", user);
 
-        System.out.println(user.getUserName());
-        System.out.println(user.getPassword());
+        //System.out.println(user.getUserName());
+        //System.out.println(user.getPassword());
 
         if (user.getRole().equals("student")) {
             if (appRepository.existsByUserId(user.getUserId()))
@@ -91,11 +91,7 @@ public class HomeController {
     }
 
     @RequestMapping("/saveCamp")
-    public String saveCamp(@RequestParam("zipCode") String zipCode, @ModelAttribute Bootcamp bootcamp, Principal principal) {
-
-        bootcamp.setZipCode(zipCode);
-
-        System.out.println(bootcamp.getZipCode());
+    public String saveCamp(@ModelAttribute Bootcamp bootcamp, Principal principal) {
 
         User user = userRepository.findOneByUserName(principal.getName());
         if (bootcampRepository.existsByBootcampDirector(user.getUserName())) {

@@ -75,7 +75,7 @@ public class Bootcamp {
         return zipCode;
     }
 
-    public void setZipCode(String zipcode) {
+    public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
     }
 
