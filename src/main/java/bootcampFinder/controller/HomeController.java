@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -77,7 +78,7 @@ public class HomeController {
     }
 
     @RequestMapping("/saveApp")
-    public String saveApp(App app, Principal principal) {
+    public String saveApp(@ModelAttribute App app, Principal principal) {
         User user = userRepository.findOneByUserName(principal.getName());
 
         if (appRepository.existsByUserId(user.getUserId())) {
@@ -90,11 +91,17 @@ public class HomeController {
     }
 
     @RequestMapping("/saveCamp")
-    public String saveCamp(Bootcamp bootcamp, Principal principal) {
+    public String saveCamp(@RequestParam("zipCode") String zipCode, @ModelAttribute Bootcamp bootcamp, Principal principal) {
+
+        bootcamp.setZipCode(zipCode);
+
+        System.out.println(bootcamp.getZipCode());
+
         User user = userRepository.findOneByUserName(principal.getName());
         if (bootcampRepository.existsByBootcampDirector(user.getUserName())) {
             long id = bootcampRepository.findOneByBootcampDirector(user.getUserName()).getBootcampId();
             bootcamp.setBootcampId(id);
+
         }
         bootcampRepository.save(bootcamp);
         return "redirect:/";
