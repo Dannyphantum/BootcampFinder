@@ -7,8 +7,6 @@ import java.util.Set;
  * Created by student on 7/17/17.
  */
 
-
-
 @Entity
 public class Role {
 
@@ -21,6 +19,8 @@ public class Role {
 
     @ManyToMany(mappedBy = "roles",fetch = FetchType.LAZY)
     private Set<User> users;
+
+    public Role(String role){this.role = role;}public Role(){}
 
     public long getRoleId() {
         return roleId;

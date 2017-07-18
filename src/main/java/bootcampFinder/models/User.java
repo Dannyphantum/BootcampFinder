@@ -12,7 +12,6 @@ import java.util.Date;
 @Entity
 public class User {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long userId;
@@ -42,7 +41,7 @@ public class User {
     private long zip;
 
     @Column(name = "enabled")
-    private boolean enabled = true;
+    private boolean enabled;
 
     @Column(name = "user_date")
     private Date userDate = new Date();
@@ -50,6 +49,13 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
+
+    public User(String fullName, String userName, String email, String password, String street, String city, String state, long zip, boolean enabled, Date userDate) {
+        this.fullName = fullName;   this.userName = userName;   this.email = email;
+        this.password = password;   this.street = street;       this.city = city;
+        this.state = state;         this.zip = zip;             this.enabled = enabled;
+        this.userDate = userDate;
+    }public User(){}
 
     public long getUserId() {
         return userId;
