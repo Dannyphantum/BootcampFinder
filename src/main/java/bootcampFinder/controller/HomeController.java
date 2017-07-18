@@ -77,13 +77,27 @@ public class HomeController {
     }
 
     @RequestMapping("/saveApp")
-    public String saveApp(App app) {
+    public String saveApp(App app, Principal principal) {
+        User user = userRepository.findOneByUserName(principal.getName());
+
+        if (appRepository.existsByUserId(user.getUserId())) {
+            long id = appRepository.findOneByUserId(user.getUserId()).getAppId();
+            app.setAppId(id);
+        }
+
         appRepository.save(app);
         return "redirect:/";
     }
 
     @RequestMapping("/saveCamp")
-    public String saveCamp(Bootcamp bootcamp) {
+    public String saveCamp(Bootcamp bootcamp, Principal principal) {
+        User user = userRepository.findOneByUserName(principal.getName());
+
+        if (bootcampRepository.existsByBootcampDirector(user.getUserName())) {
+            long id = bootcampRepository.findOneByBootcampDirector(user.getUserName()).getBootcampId();
+            bootcamp.setBootcampId(id);
+        }
+
         bootcampRepository.save(bootcamp);
         return "redirect:/";
     }
