@@ -62,7 +62,7 @@
                     <form th:object="${app}" method="POST" action="/saveApp">
                         <input type="text" class="form-control" name="degree" th:value="${app.degree}" placeholder="degree"/>
                         <input type="text" class="form-control" name="skills" th:value="${app.skills}" placeholder="skills"/>
-                        <input type="number" class="form-control" name="yrsExperience" th:value="${app.yrsExperience}" placeholder="years experience"/>
+                        <input type="text" class="form-control" name="yrsExperience" th:value="${app.yrsExperience}" placeholder="years experience"/>
 
                         <input type="hidden" name="userId" class="form-control" th:value="${user.userId}"/>
                         <input type="submit" value="save" class="btn btn-success btn-block"/>
@@ -78,7 +78,7 @@
                         <input type="text" class="form-control" name="streetAddress" th:value="${camp.streetAddress}" placeholder="street"/>
                         <input type="text" class="form-control" name="state" th:value="${camp.state}" placeholder="state"/>
                         <input type="text" class="form-control" name="city" th:value="${camp.city}" placeholder="city"/>
-                        <input type="number" class="form-control" name="zipCode" th:value="${camp.zipCode}" placeholder="zipCode"/>
+                        <input type="text" class="form-control" name="zipCode" th:value="${camp.zipCode}" placeholder="zipCode"/>
                         <input type="text" class="form-control" name="topics" th:value="${camp.topics}" placeholder="topics"/>
                         <input type="text" class="form-control" name="description" th:value="${camp.description}" placeholder="description"/>
 

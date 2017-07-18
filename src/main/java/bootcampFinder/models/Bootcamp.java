@@ -23,7 +23,7 @@ public class Bootcamp {
 
     private String city;
 
-    private long zipCode;
+    private String zipCode;
 
     private String topics;
 
@@ -71,11 +71,11 @@ public class Bootcamp {
         this.city = city;
     }
 
-    public long getZipCode() {
+    public String getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(long zipcode) {
+    public void setZipCode(String zipcode) {
         this.zipCode = zipCode;
     }
 

@@ -92,12 +92,10 @@ public class HomeController {
     @RequestMapping("/saveCamp")
     public String saveCamp(Bootcamp bootcamp, Principal principal) {
         User user = userRepository.findOneByUserName(principal.getName());
-
         if (bootcampRepository.existsByBootcampDirector(user.getUserName())) {
             long id = bootcampRepository.findOneByBootcampDirector(user.getUserName()).getBootcampId();
             bootcamp.setBootcampId(id);
         }
-
         bootcampRepository.save(bootcamp);
         return "redirect:/";
     }
