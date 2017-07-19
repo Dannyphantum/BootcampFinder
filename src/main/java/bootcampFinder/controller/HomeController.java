@@ -247,8 +247,8 @@ public class HomeController {
         if (appRepository.existsByUserName(user.getUserName())) {
             long id = appRepository.findOneByUserName(user.getUserName()).getAppId();
             app.setAppId(id);
+            appRepository.save(app);
         }
-        appRepository.save(app);
         return "redirect:/";
     }
 
@@ -259,8 +259,8 @@ public class HomeController {
             Bootcamp temp = bootcampRepository.findOneByBootcampDirector(user.getUserName());
             bootcamp.setBootcampId(temp.getBootcampId());
             bootcamp.setEnabled(temp.getEnabled());
+            bootcampRepository.save(bootcamp);
         }
-        bootcampRepository.save(bootcamp);
         return "redirect:/";
     }
 
