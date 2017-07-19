@@ -5,20 +5,33 @@
     <title>Title</title>
 </head>
 <body>
+<nav class="navbar navbar-default" th:replace="base::navbar"> </nav>
 <div class="container">
 
-        <nav class="navbar navbar-default" th:replace="base::navbar"> </nav>
 
-    <table class="table table-hover" >
+    <div class="=jumbotron">
+        <h1 th:text="${bootcamp.bootcampName}">name error</h1>
+        <p>
+            <th:block th:text="${bootcamp.streetAddress}"> streen error</th:block>
+            <th:block th:text="${bootcamp.state}"> streen error</th:block>
+            <th:block th:text="${bootcamp.city}"> streen error</th:block>
+            <th:block th:text="${bootcamp.zipCode}"> streen error</th:block>
+        </p>
+        <p th:text="${bootcamp.topics}">topics error</p>
+        <p th:text="${bootcamp.description}">description error</p>
 
-            <tr th:each="link : ${bootlisting}">
+    </div>
+
+
+    <!--<table class="table table-hover">
+            <tr th:each="link : ${bootcamp}">
                 <td th:text = "${link.bootcampName}"></td>
                 <td th:text = "${link.streetAddress}"></td>
                 <td th:text = "${link.city}">
             </tr>
         </table>
         <table>
-            <tr th:each="link : ${bootlisting}">
+            <tr th:each="link : ${bootcamp}">
                 <h3 style="font-family:Tahoma;color:#006699";>Boot Camp Director</h3>
                 <h4 style="font-family:Tahoma;color:#006699"; th:text="${link.bootcampDirector}"></h4>
                 <h4 style="font-family:Tahoma;color:#006699"; th:text="${link.bootcampName}"></h4>
@@ -27,27 +40,32 @@
                 </h5>
             </tr>
         </table>
-
+-->
 
         <div class="col-md-4">
-            <h2>Testimonial</h2>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-            <p><a class="btn btn-default" href="#" role="button">Read More &raquo;</a></p>
+            <center><h2>Testimonial</h2></center>
+            <th:block th:each="test : ${testimonals}">
+                <div class="well">
+                    <h3 th:text="test.userName">username error</h3>
+                    <p th:text="${test.message}">message error</p>
+                </div>
+            </th:block>
         </div>
 
 
             <div class="col-md-4">
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,</p>
                 <p><a class="btn btn-default" href="#" role="button">APPLY &raquo;</a></p>
-                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo,</p>
                 <p><a class="btn btn-default" href="#" role="button">EMAIL &raquo;</a></p>
             </div>
 
-            <div class="col-md-4">
-                <h2>Register</h2>
-                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-                <p><a class="btn btn-default" href="#" role="button">Read More &raquo;</a></p>
-            </div>
+    <div class="col-md-4">
+        <h4>Feedback</h4>
+        <form action="#" th:action="@{/testimonial/{id} (id=bootcamp.bootcampId)}" th:object="${testimonial}" method="POST">
+            <textarea rows="7" cols="35" placeholder="Enter Your Comment here"  th:field="*{message}"></textarea>
+            <p><input type="submit" class="btn btn-primary btn-block" value="testify"/></p>
+        </form>
+
+    </div>
 
 </div>
 </body>

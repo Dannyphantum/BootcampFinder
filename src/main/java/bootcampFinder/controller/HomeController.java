@@ -88,17 +88,23 @@ public class HomeController {
         return "search";
 }
 
-
+    @RequestMapping("/bootcamp/{id}")
+    public String viewBootcamp(Model model, @PathVariable("id") long id) {
+        model.addAttribute("bootcamp", bootcampRepository.findOne(id));
+        model.addAttribute("testimonials", testimonialRepository.findAllByBootcampId(id));
+        model.addAttribute("testimonial", new Testimonial());
+        return "displaybootcamp";
+    }
 
     @RequestMapping("/search")
-    private String search(Model model) {
+    public String search(Model model) {
         model.addAttribute("bootcamp", new Bootcamp());
         model.addAttribute("camps", new ArrayList<Bootcamp>());
         return "search";
     }
 
     @RequestMapping("/searchTerm")
-    private String searchTerm(Model model,@ModelAttribute Bootcamp search) {
+    public String searchTerm(Model model,@ModelAttribute Bootcamp search) {
         model.addAttribute("bootcamp", new Bootcamp());
         ArrayList<Bootcamp> camps =  new ArrayList<>();
         for (Bootcamp camp : bootcampRepository.findAllByDescriptionContaining(search.getBootcampName()))
