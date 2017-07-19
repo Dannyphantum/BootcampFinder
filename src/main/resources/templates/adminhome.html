@@ -89,9 +89,9 @@
                     </thead>
                     <th:block th:each="r : ${requests}">
                         <tr>
-                            <td th:text="r.student"></td>
-                            <td th:text="r.camp"></td>
-                            <td th:text="r.status"></td>
+                            <td th:text="${r.student}"></td>
+                            <td th:text="${r.camp}"></td>
+                            <td th:text="${r.status}"></td>
                         </tr>
                     </th:block>
                 </table>
