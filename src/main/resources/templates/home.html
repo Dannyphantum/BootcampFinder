@@ -60,10 +60,17 @@
             <th:block sec:authorize="hasAuthority('STUDENT')">
                 <div class="well">
                     <form th:object="${app}" method="POST" action="/saveApp">
+<<<<<<< HEAD
                         <input type="text" class="form-control" name="degree" th:field="${app.degree}" placeholder="Degree"/>
                         <input type="text" class="form-control" name="skills" th:field="${app.skills}" placeholder="Skills"/>
                         <input type="text" class="form-control" name="yrsExperience" th:field="${app.yrsExperience}" placeholder="Years Experience"/>
                         <input type="hidden" name="userId" class="form-control" th:value="${user.userId}"/>
+=======
+                        <input type="text" class="form-control" name="degree" th:field="${app.degree}" placeholder="degree"/>
+                        <input type="text" class="form-control" name="skills" th:field="${app.skills}" placeholder="skills"/>
+                        <input type="text" class="form-control" name="yrsExperience" th:field="${app.yrsExperience}" placeholder="years experience"/>
+                        <input type="hidden" name="userName" th:value="${user.userName}"/>
+>>>>>>> b4d43a0a8cae77132d0104d08731eb36fd7b8752
                         <input type="submit" value="save" class="btn btn-success btn-block"/>
                     </form>
                 </div>
@@ -79,17 +86,30 @@
                         <input type="text" class="form-control" name="streetAddress" th:field="${camp.streetAddress}" placeholder="street"/>
                         <input type="text" class="form-control" name="state" th:field="${camp.state}" placeholder="state"/>
                         <input type="text" class="form-control" name="city" th:field="${camp.city}" placeholder="city"/>
-
-
-
                         <input type="text" class="form-control" name="zipCode" th:field="${camp.zipCode}" placeholder="zipCode"/>
-
-
                         <input type="text" class="form-control" name="topics" th:field="${camp.topics}" placeholder="topics"/>
                         <input type="text" class="form-control" name="description" th:field="${camp.description}" placeholder="description"/>
                         <input type="hidden" name="bootcampDirector" class="form-control" th:value="${user.userName}"/>
                         <input type="submit" value="save" class="btn btn-success btn-block"/>
                     </form>
+                </div>
+
+                <div class="well">
+
+                    <th:block th:each="test : ${testimonials}">
+
+                        <div class="well">
+
+                            <h3 th:text="${test.userName}">username error</h3>
+                            <p th:text="${test.message}">message error</p>
+                            <a th:href="@{'/deletetest/' + ${test.id}">
+                                <button class="btn btn-danger btn-block">delete</button>
+                            </a>
+
+                        </div>
+
+                    </th:block>
+
                 </div>
 
             </th:block>

@@ -49,6 +49,16 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @RequestMapping("/deletetest/{id}")
+    public String delTest(@PathVariable("id") long id, Principal principal) {
+        Testimonial test = testimonialRepository.findOne(id);
+        User user = userRepository.findOneByUserName(principal.getName());
+        Bootcamp camp = bootcampRepository.findOneByBootcampDirector(user.getUserName());
+        if (test.getBootcampId() == camp.getBootcampId())
+            testimonialRepository.delete(test);
+        return "redirect:/";
+    }
+
     @RequestMapping("/")
     public String home(Model model, Principal principal) {
         User user = userRepository.findOneByUserName(principal.getName());
@@ -57,11 +67,12 @@ public class HomeController {
         if (user.getRole().equals("student")) {
             if (appRepository.existsByUserName(user.getUserName()))
                 model.addAttribute("app", appRepository.findOneByUserName(user.getUserName()));
-            else model.addAttribute("app", new App());
         } else if (user.getRole().equals("director")) {
-            if (bootcampRepository.existsByBootcampDirector(user.getUserName()))
-                model.addAttribute("camp", bootcampRepository.findOneByBootcampDirector(user.getUserName()));
-            else model.addAttribute("camp", new Bootcamp());
+            if (bootcampRepository.existsByBootcampDirector(user.getUserName())) {
+                Bootcamp boot = bootcampRepository.findOneByBootcampDirector(user.getUserName());
+                model.addAttribute("camp", boot);
+                model.addAttribute("testimonials", testimonialRepository.findAllByBootcampId(boot.getBootcampId()));
+            }
         } else if (user.getRole().equals("admin")) {
             model.addAttribute("apps", appRepository.findAll());
             model.addAttribute("camps", bootcampRepository.findAll());
@@ -150,8 +161,14 @@ public class HomeController {
     @RequestMapping("/city")
     public String city(Model model, Principal principal) {
         if (userRepository.findOneByUserName(principal.getName()).getRole().equals("student")) {
-            model.addAttribute("camps", bootcampRepository.findAllByCity(
-                    userRepository.findOneByUserName(principal.getName()).getCity()));
+
+            ArrayList<Bootcamp> camps = new ArrayList<>();
+
+            for (Bootcamp boot : bootcampRepository.findAllByCity(userRepository.findOneByUserName(principal.getName()).getCity()))
+                if (boot.getEnabled().equals("enabled"))
+                    camps.add(boot);
+
+            model.addAttribute("camps", camps);
             model.addAttribute("bootcamp", new Bootcamp());
             return "search";
         }

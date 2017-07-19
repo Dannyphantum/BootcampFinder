@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Date;
 
 /**
  * Created by student on 7/17/17.
@@ -31,7 +32,17 @@ public class Bootcamp {
 
     private String bootcampDirector;
 
+    private Date date;
+
     private String enabled;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     public String getEnabled() {
         return enabled;
@@ -122,6 +133,7 @@ public class Bootcamp {
         topics = "please add topics";
         description = "please add a description";
         enabled = "disabled";
+        date = new Date();
         this.bootcampDirector = bootcampDirector;
     }
 
