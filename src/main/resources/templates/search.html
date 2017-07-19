@@ -19,17 +19,17 @@
 
             <tr>
                 <th>Boot Camps</th>
-                <th>Street Address</th>
-                <th>Topic</th>
+                <th>Topics</th>
+                <th>view bootcamp</th>
             </tr>
 
             <th:block th:each="camp : ${camps}">
                 <tr>
                     <td th:text="${camp.bootcampName}">name error</td>
-                    <td th:text="${camp.topics">topics error</td>
+                    <td th:text="${camp.topics}">topics error</td>
                     <td>
-                        <a th:href="@{bootcamp/{id}(id=${link.bootcampId})}">
-                            <button type="button" class="btn btn-primary">view bootcamp details</button>
+                        <a th:href="@{bootcamp/{id}(id=${camp.bootcampId})}">
+                            <button type="button" class="btn btn-primary btn-sm">view bootcamp details</button>
                         </a>
                     </td>
                 </tr>
@@ -46,7 +46,7 @@
     const ID = id => document.getElementById(id);
     $('#search_button').click( () => {
         ID('form_input').value = ID('search_input').value;
-        $('#form').submit();
+        ID('form').submit();
     });
 </script>
 

@@ -98,18 +98,16 @@ public class HomeController {
     }
 
     @RequestMapping("/searchTerm")
-    private String searchTerm(Model model, Bootcamp search) {
+    private String searchTerm(Model model,@ModelAttribute Bootcamp search) {
         model.addAttribute("bootcamp", new Bootcamp());
-        List<Bootcamp> camps =  new ArrayList<>();
+        ArrayList<Bootcamp> camps =  new ArrayList<>();
         for (Bootcamp camp : bootcampRepository.findAllByDescriptionContaining(search.getBootcampName()))
             if (camp.getEnabled().equals("enabled"))
                 camps.add(camp);
         for (Bootcamp camp : bootcampRepository.findAllByTopicsContaining(search.getBootcampName()))
             if (camp.getEnabled().equals("enabled"))
-                for(Bootcamp boot : camps)
-                    if (!camp.getBootcampDirector().equals(boot.getBootcampDirector()))
-                        camps.add(camp);
-        model.addAttribute("camps", new ArrayList<Bootcamp>());
+                camps.add(camp);
+        model.addAttribute("camps", camps);
         return "search";
     }
 
