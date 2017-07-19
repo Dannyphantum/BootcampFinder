@@ -37,14 +37,14 @@ public class DataLoader implements CommandLineRunner{
 
     @Override
     public void run(String... strings) throws Exception {
-/*
+
 
         //only do if database hasn't been built yet
         //if (!roleRepository.existsByRole("ADMIN")) {
 
-         //   roleRepository.save(new Role("ADMIN"));
-         //   roleRepository.save(new Role("STUDENT"));
-         //   roleRepository.save(new Role("DIRECTOR"));
+            roleRepository.save(new Role("ADMIN"));
+            roleRepository.save(new Role("STUDENT"));
+            roleRepository.save(new Role("DIRECTOR"));
 
             Role adminRole = roleRepository.findByRole("ADMIN");
             Role studentRole = roleRepository.findByRole("STUDENT");
@@ -77,7 +77,7 @@ public class DataLoader implements CommandLineRunner{
         userRepository.save(userRepository.findOneByUserName("student").setRole("student"));
         userRepository.save(userRepository.findOneByUserName("director").setRole("director"));
         userRepository.save(userRepository.findOneByUserName("ADMIN").setRole("admin"));
-*/
+
     }
     //}
 }
