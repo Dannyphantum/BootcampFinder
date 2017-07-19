@@ -96,15 +96,19 @@ public class HomeController {
         model.addAttribute("camps", new ArrayList<Bootcamp>());
         return "search";
     }
+
     @RequestMapping("/searchTerm")
     private String searchTerm(Model model, Bootcamp search) {
         model.addAttribute("bootcamp", new Bootcamp());
         List<Bootcamp> camps =  new ArrayList<>();
-        camps.addAll(bootcampRepository.findAllByDescriptionContaining(search.getBootcampName()));
+        for (Bootcamp camp : bootcampRepository.findAllByDescriptionContaining(search.getBootcampName()))
+            if (camp.getEnabled().equals("enabled"))
+                camps.add(camp);
         for (Bootcamp camp : bootcampRepository.findAllByTopicsContaining(search.getBootcampName()))
-            for(Bootcamp boot : camps)
-                if (!camp.getBootcampDirector().equals(boot.getBootcampDirector()))
-                    camps.add(camp);
+            if (camp.getEnabled().equals("enabled"))
+                for(Bootcamp boot : camps)
+                    if (!camp.getBootcampDirector().equals(boot.getBootcampDirector()))
+                        camps.add(camp);
         model.addAttribute("camps", new ArrayList<Bootcamp>());
         return "search";
     }
@@ -174,11 +178,12 @@ public class HomeController {
 
     @RequestMapping("/saveCamp")
     public String saveCamp(@ModelAttribute Bootcamp bootcamp, Principal principal) {
-
         User user = userRepository.findOneByUserName(principal.getName());
+
         if (bootcampRepository.existsByBootcampDirector(user.getUserName())) {
-            long id = bootcampRepository.findOneByBootcampDirector(user.getUserName()).getBootcampId();
-            bootcamp.setBootcampId(id);
+            Bootcamp temp = bootcampRepository.findOneByBootcampDirector(user.getUserName());
+            bootcamp.setBootcampId(temp.getBootcampId());
+            bootcamp.setEnabled(temp.getEnabled());
         }
         bootcampRepository.save(bootcamp);
         return "redirect:/";

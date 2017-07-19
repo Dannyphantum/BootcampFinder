@@ -5,7 +5,7 @@
     <style>
         .well {
             height: 550px;
-            overflow-y: scroll;
+            overflow-y: hidden;
         }
     </style>
 </head>
@@ -45,7 +45,7 @@
                 <table class="table table-hover">
                     <thead>
                         <th>Camp Name</th>
-                        <th>View Boot Camp</th>
+                        <th>View Camp</th>
                         <th>Enabled?</th>
                     </thead>
 
@@ -61,14 +61,14 @@
                                 <th:block th:case="enabled">
                                     <td>
                                         <a th:href="@{'/disable/' + ${c.bootcampId}}">
-                                            <button class="btn btn-sm btn-danger">yes click to disable</button>
+                                            <button class="btn btn-sm btn-danger" style="width: 150px;">yes click to disable</button>
                                         </a>
                                     </td>
                                 </th:block>
                                 <th:block th:case="disabled">
                                     <td>
                                         <a th:href="@{'/enable/' + ${c.bootcampId}}">
-                                            <button class="btn btn-sm btn-success">no click to enable</button>
+                                            <button class="btn btn-sm btn-success" style="width: 150px;">no click to enable</button>
                                         </a>
                                     </td>
                                 </th:block>

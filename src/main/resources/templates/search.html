@@ -1,20 +1,56 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="www.thymeleaf.org">
-<head th:replace="base :: head">
-    <meta charset="UTF-8" />
-    <title>Title</title>
+<html lang="en" xmlns:th="www.thymeleaf.org " xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:replace="base :: head">head error</th:block>
 </head>
 <body>
+<th:block class="navbar navbar-default" th:replace="base::navbar">nav error</th:block>
+
 <div class="container">
     <div class="jumbotron">
-        <nav class="navbar navbar-default" th:replace="base::navbar"> </nav>
 
-<form th:action="@{/search}" th:object="${bootcamp}" method="post">
-    <input type="text" th:field="*{zipCode}" />
-    <button type="submit" class="btn btn-primary">Search</button>
-</form>
+        <table class="table table-hover">
 
+            <tr>
+                <td><input class="form-control" id="search_input" type="text"/></td>
+                <td><button id="search_button" class="btn btn-info btn-block">search</button></td>
+                <td>(add search params here)</td>
+            </tr>
+
+            <tr>
+                <th>Boot Camps</th>
+                <th>Street Address</th>
+                <th>Topic</th>
+            </tr>
+
+            <th:block th:each="camp : ${camps}">
+                <tr>
+                    <td th:text="${camp.bootcampName}">name error</td>
+                    <td th:text="${camp.topics">topics error</td>
+                    <td>
+                        <a th:href="@{bootcamp/{id}(id=${link.bootcampId})}">
+                            <button type="button" class="btn btn-primary">view bootcamp details</button>
+                        </a>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
     </div>
 </div>
+
+<form id="form" th:action="@{/searchTerm}" th:object="${bootcamp}" method="post">
+    <input id="form_input" type="hidden" th:field="*{bootcampName}"/>
+</form>
+
+<script>
+    const ID = id => document.getElementById(id);
+    $('#search_button').click( () => {
+        ID('form_input').value = ID('search_input').value;
+        $('#form').submit();
+    });
+</script>
+
 </body>
 </html>
+
+
