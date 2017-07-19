@@ -42,21 +42,22 @@
         </table>
 -->
 
-        <div class="col-md-4">
-            <center><h2>Testimonial</h2></center>
-            <th:block th:each="test : ${testimonals}">
-                <div class="well">
-                    <h3 th:text="test.userName">username error</h3>
-                    <p th:text="${test.message}">message error</p>
-                </div>
-            </th:block>
-        </div>
-
-
-            <div class="col-md-4">
-                <p><a class="btn btn-default" href="#" role="button">APPLY &raquo;</a></p>
-                <p><a class="btn btn-default" href="#" role="button">EMAIL &raquo;</a></p>
+    <div class="col-md-4">
+        <center><h2>Testimonial</h2></center>
+        <th:block th:each="test : ${testimonals}">
+            <div class="well">
+                <h3 th:text="${test.userName}">username error</h3>
+                <p th:text="${test.message}">message error</p>
             </div>
+        </th:block>
+    </div>
+
+    <div class="col-md-4">
+        <br/><br/><br/>
+        <a class="btn btn-default btn-block" th:href="@{'/apply/' + ${bootcamp.bootcampDirector} }" role="button">APPLY &raquo;</a>
+        <br/><br/><br/>
+        <a class="btn btn-default btn-block" th:href="@{'/email/' + ${bootcamp.bootcampId} }" role="button">EMAIL &raquo;</a>
+    </div>
 
     <div class="col-md-4">
         <h4>Feedback</h4>

@@ -38,7 +38,7 @@
                             <td th:text="${message.sender}">sender error</td>
                             <td th:text="${message.title}">title error</td>
                             <td>
-                                <a th:href="@{'/viewMessage/' + ${message.id}">
+                                <a th:href="@{'/viewMessage/' + ${message.id} }">
                                     <button class="btn btn-xs btn-info">view</button>
                                 </a>
                             </td>

@@ -2,10 +2,7 @@ package bootcampFinder.controller;
 
 import bootcampFinder.configurations.UserService;
 import bootcampFinder.configurations.UserValidator;
-import bootcampFinder.models.App;
-import bootcampFinder.models.Bootcamp;
-import bootcampFinder.models.Testimonial;
-import bootcampFinder.models.User;
+import bootcampFinder.models.*;
 import bootcampFinder.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -125,6 +122,30 @@ public class HomeController {
         model.addAttribute("camps", camps);
         return "search";
     }
+
+    @RequestMapping("/apply/{name}")
+    public String apply(Principal principal, @PathVariable("name") String name) {
+        User user = userRepository.findOneByUserName(principal.getName());
+        boolean hasReq = false;
+        for (Request req : requestRepository.findAllByStudent(user.getUserName()))
+            if (req.getCamp().equals(name))
+                hasReq = true;
+        if (!hasReq && user.getRole().equals("student")) {//so user cant apply twice
+            Request request = new Request();
+            Message message = new Message();
+            request.setCamp(name);
+            request.setStatus("pending");
+            request.setStudent(user.getUserName());
+            message.setContent(user.getUserName() + " applied to your bootcamp");
+            message.setSender(user.getUserName());
+            message.setTitle("student applied");
+            message.setRecieverId(userRepository.findByUserName(name).getUserId());
+            requestRepository.save(request);
+            messageRepository.save(message);
+        }
+        return "redirect:/";
+    }
+
 
     @RequestMapping("/disable/{id}")
     public String disable(Principal principal, @PathVariable("id") long id) {
