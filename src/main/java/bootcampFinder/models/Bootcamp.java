@@ -31,6 +31,10 @@ public class Bootcamp {
 
     private String bootcampDirector;
 
+
+
+
+
     public long getBootcampId() {
         return bootcampId;
     }
@@ -102,4 +106,17 @@ public class Bootcamp {
     public void setBootcampDirector(String bootcampDirector) {
         this.bootcampDirector = bootcampDirector;
     }
+
+    public void makeNew(String bootcampDirector) {
+        bootcampName = "please chose a name";
+        streetAddress = "please give a Street";
+        state = "please give a state";
+        city = "please give a city";
+        zipCode  ="please give a zip code";
+        topics = "please add topics";
+        description = "please add a description";
+        this.bootcampDirector = bootcampDirector;
+    }
+
+
 }

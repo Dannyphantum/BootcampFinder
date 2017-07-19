@@ -13,18 +13,18 @@ public class Testimonial {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long userId;
+    private String userName;
 
     private String message;
 
     private long bootcampId;
 
-    public long getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getMessage() {

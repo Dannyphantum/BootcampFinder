@@ -47,8 +47,8 @@ public class HomeController {
         //System.out.println(user.getPassword());
 
         if (user.getRole().equals("student")) {
-            if (appRepository.existsByUserId(user.getUserId()))
-                model.addAttribute("app", appRepository.findOneByUserId(user.getUserId()));
+            if (appRepository.existsByUserName(user.getUserName()))
+                model.addAttribute("app", appRepository.findOneByUserName(user.getUserName()));
             else model.addAttribute("app", new App());
         } else if (user.getRole().equals("director")) {
             if (bootcampRepository.existsByBootcampDirector(user.getUserName()))
@@ -81,8 +81,8 @@ public class HomeController {
     public String saveApp(@ModelAttribute App app, Principal principal) {
         User user = userRepository.findOneByUserName(principal.getName());
 
-        if (appRepository.existsByUserId(user.getUserId())) {
-            long id = appRepository.findOneByUserId(user.getUserId()).getAppId();
+        if (appRepository.existsByUserName(user.getUserName())) {
+            long id = appRepository.findOneByUserName(user.getUserName()).getAppId();
             app.setAppId(id);
         }
 
@@ -119,14 +119,19 @@ public class HomeController {
             return "registration";
         } else if (user.getRole().equals("student")) {
             userService.saveStudent(user);
+            App app = new App();
+            app.makeNew(user.getUserName());
+            appRepository.save(app);
             model.addAttribute("message", "Student Account Successfully Created");
         } else if (user.getRole().equals("director")) {
             userService.saveDirector(user);
+            Bootcamp camp = new Bootcamp();
+            camp.makeNew(user.getUserName());
+            bootcampRepository.save(camp);
             model.addAttribute("message", "Director Account Successfully Created");
         }
         return "login";
     }
-
 
 
     private User getUser(Authentication authentication) {

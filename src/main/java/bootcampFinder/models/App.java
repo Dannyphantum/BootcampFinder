@@ -19,7 +19,7 @@ public class App {
 
     private String yrsExperience;
 
-    private long userId;
+    private String userName;
 
 
     public long getAppId() {
@@ -54,14 +54,19 @@ public class App {
         this.yrsExperience = yrsExperience;
     }
 
-    public long getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserId(long userId) {
-        this.userId = userId;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-
+    public void makeNew(String userName) {
+        degree = "please add your degrees";
+        skills = "please add your skills";
+        yrsExperience = "please provide your experience";
+        this.userName = userName;
+    }
 
 }

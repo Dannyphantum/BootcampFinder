@@ -9,7 +9,7 @@ import org.springframework.data.repository.CrudRepository;
 import bootcampFinder.models.App;
 
 public interface AppRepository extends CrudRepository<App, Long> {
-    boolean existsByUserId(long userId);
+    boolean existsByUserName(String userName);
 
-    App findOneByUserId(long userId);
+    App findOneByUserName(String userName);
 }
