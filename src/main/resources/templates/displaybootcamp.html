@@ -23,7 +23,7 @@
 
     <div class="col-md-4">
         <center><h2>Testimonial</h2></center>
-        <th:block th:each="test : ${testimonals}">
+        <th:block th:each="test : ${testimonials}">
             <div class="well">
                 <h3 th:text="${test.userName}">username error</h3>
                 <p th:text="${test.message}">message error</p>
