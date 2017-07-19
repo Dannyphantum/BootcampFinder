@@ -87,7 +87,7 @@ public class HomeController {
     @RequestMapping(value="/testimonial/{id}", method = RequestMethod.POST)
     public String viewBootCampPost(Model model, @PathVariable("id") long id
             , @RequestParam ("message") String message, Principal principal) {
-        ArrayList<Testimonial> userTests = testimonialRepository.findAllByStudent(principal.getName());
+        ArrayList<Testimonial> userTests = testimonialRepository.findAllByUserName(principal.getName());
 
         boolean hasTest = false;
         for (Testimonial test : userTests)

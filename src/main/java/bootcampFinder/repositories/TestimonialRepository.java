@@ -12,5 +12,5 @@ import java.util.ArrayList;
 public interface TestimonialRepository extends CrudRepository<Testimonial, Long> {
     Testimonial[] findAllByBootcampId(long id);
 
-    ArrayList<Testimonial> findAllByStudent(String name);
+    ArrayList<Testimonial> findAllByUserName(String name);
 }
