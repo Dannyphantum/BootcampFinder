@@ -61,7 +61,7 @@
 
     <div class="col-md-4">
         <h4>Feedback</h4>
-        <form action="#" th:action="@{/testimonial/{id} (id=bootcamp.bootcampId)}" th:object="${testimonial}" method="POST">
+        <form action="#" th:action="@{'/testimonial/' + ${bootcamp.bootcampId} }" th:object="${testimonial}" method="POST">
             <textarea rows="7" cols="35" placeholder="Enter Your Comment here"  th:field="*{message}"></textarea>
             <p><input type="submit" class="btn btn-primary btn-block" value="testify"/></p>
         </form>
