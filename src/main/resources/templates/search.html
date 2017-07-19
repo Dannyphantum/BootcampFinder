@@ -12,15 +12,15 @@
         <table class="table table-hover">
 
             <tr>
-                <td><input class="form-control" id="search_input" type="text"/></td>
-                <td><button id="search_button" class="btn btn-info btn-block">search</button></td>
-                <td><a href="/city"><button class="btn btn-success btn-block">view camps in your city</button></a></td>
+                <td><input class="form-control" id="search_input" type="text" placeholder="Search Topic"/></td>
+                <td><button id="search_button" class="btn btn-info btn-block">Search</button></td>
+                <td><a href="/city"><button class="btn btn-success btn-block">View camps in your city.</button></a></td>
             </tr>
 
             <tr>
                 <th>Boot Camps</th>
                 <th>Topics</th>
-                <th>view bootcamp</th>
+                <th>View BootCamp</th>
             </tr>
 
             <th:block th:each="camp : ${camps}">
@@ -29,7 +29,7 @@
                     <td th:text="${camp.topics}">topics error</td>
                     <td>
                         <a th:href="@{bootcamp/{id}(id=${camp.bootcampId})}">
-                            <button type="button" class="btn btn-primary btn-sm">view bootcamp details</button>
+                            <button type="button" class="btn btn-primary btn-sm">View BootCamp Details</button>
                         </a>
                     </td>
                 </tr>
