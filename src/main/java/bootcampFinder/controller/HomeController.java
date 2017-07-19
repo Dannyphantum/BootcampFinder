@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -107,8 +108,7 @@ public class HomeController {
         model.addAttribute("testimonal", new Testimonial());
 
         List<Testimonial> testimonials = new ArrayList<>();
-        for (Testimonial t : testimonialRepository.findAllByBootcampId(id))
-            testimonials.add(t);
+        testimonials.addAll(Arrays.asList(testimonialRepository.findAllByBootcampId(id)));
         model.addAttribute("testimonals", testimonials);
 
         bootcamp = bootcampRepository.findByBootcampId(bootcamp.getBootcampId());
