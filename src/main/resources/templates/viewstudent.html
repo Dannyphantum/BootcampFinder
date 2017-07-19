@@ -22,6 +22,10 @@
                     <th:block th:text="${user.state}">state error</th:block>
                     <th:block th:text="${user.zip}">zip error</th:block>
                 </p>
+
+
+                <a th:href="@{'/emailstudent/' + ${user.userId} }" >  <button class="btn btn-success btn-block" >Send Email</button></a>
+
             </div>
         </div>
         <div class="col-md-6">
@@ -39,6 +43,7 @@
                     <p>degree:</p>
                     <th:block th:text="${app.degree}">degree error</th:block>
                 </p>
+
             </div>
         </div>
     </div>
