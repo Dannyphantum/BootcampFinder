@@ -147,6 +147,17 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @RequestMapping("/city")
+    public String city(Model model, Principal principal) {
+        if (userRepository.findOneByUserName(principal.getName()).getRole().equals("student")) {
+            model.addAttribute("camps", bootcampRepository.findAllByCity(
+                    userRepository.findOneByUserName(principal.getName()).getCity()));
+            model.addAttribute("bootcamp", new Bootcamp());
+            return "search";
+        }
+        return "redirect:/search";
+    }
+
     @RequestMapping("/bootcamp/{id}")
     public String viewBootcamp(Model model, @PathVariable("id") long id) {
         model.addAttribute("bootcamp", bootcampRepository.findOne(id));
