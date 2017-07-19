@@ -109,6 +109,22 @@ public class HomeController {
         return "search";
     }
 
+    @RequestMapping("/disable/{id}")
+    public String disable(Principal principal, @PathVariable("id") long id) {
+        User user = userRepository.findOneByUserName(principal.getName());
+        if (user.getRole().equals("admin"))
+            bootcampRepository.save(bootcampRepository.findOne(id).disable());
+        return "redirect:/";
+    }
+
+    @RequestMapping("/enable/{id}")
+    public String enable(Principal principal, @PathVariable("id") long id) {
+        User user = userRepository.findOneByUserName(principal.getName());
+        if (user.getRole().equals("admin"))
+            bootcampRepository.save(bootcampRepository.findOne(id).enable());
+        return "redirect:/";
+    }
+
 
 /*
     @RequestMapping(value = "/search", method = RequestMethod.POST)
@@ -163,13 +179,10 @@ public class HomeController {
         if (bootcampRepository.existsByBootcampDirector(user.getUserName())) {
             long id = bootcampRepository.findOneByBootcampDirector(user.getUserName()).getBootcampId();
             bootcamp.setBootcampId(id);
-
         }
         bootcampRepository.save(bootcamp);
         return "redirect:/";
     }
-
-
 
     @RequestMapping(value="/register", method = RequestMethod.GET)
     public String showRegistrationPage(Model model){
@@ -199,10 +212,5 @@ public class HomeController {
         return "login";
     }
 
-
-    private User getUser(Authentication authentication) {
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        return userRepository.findOneByUserName(userDetails.getUsername());
-    }
 
 }

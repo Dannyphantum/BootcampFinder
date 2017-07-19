@@ -125,5 +125,13 @@ public class Bootcamp {
         this.bootcampDirector = bootcampDirector;
     }
 
+    public Bootcamp enable() {
+        enabled = "enabled";
+        return this;
+    }
 
+    public Bootcamp disable() {
+        enabled = "disabled";
+        return this;
+    }
 }
