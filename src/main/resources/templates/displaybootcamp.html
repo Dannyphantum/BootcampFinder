@@ -8,7 +8,6 @@
 <nav class="navbar navbar-default" th:replace="base::navbar"> </nav>
 <div class="container">
 
-
     <div class="=jumbotron">
         <h1 th:text="${bootcamp.bootcampName}">name error</h1>
         <p>
@@ -21,26 +20,6 @@
         <p th:text="${bootcamp.description}">description error</p>
 
     </div>
-
-
-    <!--<table class="table table-hover">
-            <tr th:each="link : ${bootcamp}">
-                <td th:text = "${link.bootcampName}"></td>
-                <td th:text = "${link.streetAddress}"></td>
-                <td th:text = "${link.city}">
-            </tr>
-        </table>
-        <table>
-            <tr th:each="link : ${bootcamp}">
-                <h3 style="font-family:Tahoma;color:#006699";>Boot Camp Director</h3>
-                <h4 style="font-family:Tahoma;color:#006699"; th:text="${link.bootcampDirector}"></h4>
-                <h4 style="font-family:Tahoma;color:#006699"; th:text="${link.bootcampName}"></h4>
-                <h5> This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.
-                    This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</h5></p>
-                </h5>
-            </tr>
-        </table>
--->
 
     <div class="col-md-4">
         <center><h2>Testimonial</h2></center>
@@ -65,7 +44,6 @@
             <textarea rows="7" cols="35" placeholder="Enter Your Comment here"  th:field="*{message}"></textarea>
             <p><input type="submit" class="btn btn-primary btn-block" value="testify"/></p>
         </form>
-
     </div>
 
 </div>

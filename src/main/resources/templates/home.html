@@ -9,8 +9,9 @@
 
     <div class="row">
 
-        <!-- profile -->
+
         <div class="col-md-4">
+            <!-- profile -->
             <div class="well">
                 <p th:text="${user.fullName}">full name error</p>
                 <p th:text="${user.userName}">username error</p>
@@ -22,17 +23,16 @@
                     <th:block th:text="${user.zip}">zip error</th:block>
                 </p>
             </div>
+            <!-- profile -->
 
+            <!-- messages -->
             <div class="well">
-
                 <table class="table table-striped">
-
                     <thead>
                         <th>sender</th>
                         <th>title</th>
                         <th>view</th>
                     </thead>
-
                     <th:block th:each="message : ${messages}">
                         <tr>
                             <td th:text="${message.sender}">sender error</td>
@@ -51,11 +51,14 @@
                     </tr>
                 </table>
             </div>
+            <!-- messages -->
+
         </div>
-        <!-- profile -->
+
 
 
         <div class="col-md-8">
+
             <!-- student application -->
             <th:block sec:authorize="hasAuthority('STUDENT')">
                 <div class="well">
@@ -69,6 +72,8 @@
                 </div>
             </th:block>
             <!-- student application -->
+
+            <!-- bootcamp application -->
             <th:block sec:authorize="hasAuthority('DIRECTOR')">
 
                 <div class="well">
@@ -91,6 +96,8 @@
                 </div>
 
             </th:block>
+            <!-- bootcamp application -->
+
         </div>
 
     </div>
