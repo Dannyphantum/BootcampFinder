@@ -12,7 +12,7 @@
 
         <div class="col-md-6">
             <div class="well" style="height: 400px;">
-                <h3>student details</h3>
+                <h3>Student Details</h3>
                 <p th:text="${user.fullName}">fullName error</p>
                 <p th:text="${user.userName}">userName error</p>
                 <p th:text="${user.email}">email error</p>
@@ -32,15 +32,15 @@
             <div class="well" style="height: 400px;">
                 <h3>Application</h3>
                 <p>
-                    <p>years of experence:</p>
+                    <p>Years of experience:</p>
                     <th:block th:text="${app.yrsExperience}">yearsEx error</th:block>
                 </p>
                 <p>
-                    <p>skills:</p>
+                    <p>Skills:</p>
                     <th:block th:text="${app.skills}">skills error</th:block>
                 </p>
                 <p>
-                    <p>degree:</p>
+                    <p>Degree:</p>
                     <th:block th:text="${app.degree}">degree error</th:block>
                 </p>
 

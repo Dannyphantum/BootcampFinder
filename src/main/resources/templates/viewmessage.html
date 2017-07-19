@@ -20,13 +20,13 @@
         <div class="well" sec:authorize="hasAuthority('DIRECTOR')" >
             <a th:href="@{'/accept/' + ${message.sender} }">
                 <button class="btn btn-success btn-block">
-                    accept <th:block th:text="${message.sender}"></th:block>
+                    Accept <th:block th:text="${message.sender}"></th:block>
                 </button>
             </a>
             <br/><br/>
             <a th:href="@{'/reject/' + ${message.sender} }">
                 <button class="btn btn-danger btn-block">
-                    reject <th:block th:text="${message.sender}"></th:block>
+                    Reject <th:block th:text="${message.sender}"></th:block>
                 </button>
             </a>
         </div>

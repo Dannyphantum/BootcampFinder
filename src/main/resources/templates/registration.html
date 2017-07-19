@@ -10,8 +10,8 @@
 <th:block th:replace="base :: navbar">nav error</th:block>
 <div class="jumbotron">
     <center>
-        <h1>Welcome to boot-camp finder!</h1>
-        <p>please register below</p>
+        <h1>Welcome to BootCamp Finder!</h1>
+        <p>Please register below.</p>
     </center>
 </div>
 
@@ -28,24 +28,24 @@
                 <!-- validate -->
 
                 <!-- user info -->
-                <span class="col-md-4"><input type="text" class="form-control" th:field="*{fullName}" placeholder="full name"/><br/><br/></span>
-                <span class="col-md-4"><input type="text" class="form-control" th:field="*{userName}" placeholder="username"/><br/><br/></span>
-                <span class="col-md-4"><input type="email" class="form-control" th:field="*{email}" placeholder="email"/><br/><br/></span>
-                <span class="col-md-4"><input type="text" class="form-control" th:field="*{city}" placeholder="city"/><br/><br/></span>
-                <span class="col-md-4"><input type="text" class="form-control" th:field="*{state}" placeholder="state"/><br/><br/></span>
-                <span class="col-md-4"><input type="text" class="form-control" th:field="*{street}" placeholder="street name"/><br/><br/></span>
-                <span class="col-md-4"><input type="text" class="form-control" th:field="*{zip}" placeholder="zip"/><br/><br/></span>
+                <span class="col-md-4"><input type="text" class="form-control" th:field="*{fullName}" placeholder="Full name"/><br/><br/></span>
+                <span class="col-md-4"><input type="text" class="form-control" th:field="*{userName}" placeholder="Username"/><br/><br/></span>
+                <span class="col-md-4"><input type="email" class="form-control" th:field="*{email}" placeholder="Email"/><br/><br/></span>
+                <span class="col-md-4"><input type="text" class="form-control" th:field="*{city}" placeholder="City"/><br/><br/></span>
+                <span class="col-md-4"><input type="text" class="form-control" th:field="*{state}" placeholder="State"/><br/><br/></span>
+                <span class="col-md-4"><input type="text" class="form-control" th:field="*{street}" placeholder="Street Name"/><br/><br/></span>
+                <span class="col-md-4"><input type="text" class="form-control" th:field="*{zip}" placeholder="Zip"/><br/><br/></span>
                 <!-- user info -->
 
                 <!-- password -->
-                <span class="col-md-4"><input type="password" class="form-control" th:field="*{password}" placeholder="password"/><br/><br/></span>
+                <span class="col-md-4"><input type="password" class="form-control" th:field="*{password}" placeholder="Password"/><br/><br/></span>
                 <!-- password -->
 
                 <!-- role picker -->
                 <span class="col-md-4">
                     <center>
                         <h6>
-                            <strong><u>what are you?</u></strong> <br/><br/>
+                            <strong><u>What are you?</u></strong> <br/><br/>
                             <input type="radio" id="director" name="role" value="director" th:field="*{role}"/>&nbsp;director&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="radio" id="student" name="role" value="student" th:field="*{role}"/>&nbsp;student&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         </h6>

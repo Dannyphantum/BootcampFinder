@@ -28,9 +28,9 @@
             <div class="well">
                 <table class="table table-striped">
                     <thead>
-                        <th>sender</th>
-                        <th>title</th>
-                        <th>view</th>
+                        <th>Sender</th>
+                        <th>Title</th>
+                        <th>View</th>
                     </thead>
                     <th:block th:each="message : ${messages}">
                         <tr>
@@ -60,10 +60,17 @@
             <th:block sec:authorize="hasAuthority('STUDENT')">
                 <div class="well">
                     <form th:object="${app}" method="POST" action="/saveApp">
+<<<<<<< HEAD
+                        <input type="text" class="form-control" name="degree" th:field="${app.degree}" placeholder="Degree"/>
+                        <input type="text" class="form-control" name="skills" th:field="${app.skills}" placeholder="Skills"/>
+                        <input type="text" class="form-control" name="yrsExperience" th:field="${app.yrsExperience}" placeholder="Years Experience"/>
+                        <input type="hidden" name="userId" class="form-control" th:value="${user.userId}"/>
+=======
                         <input type="text" class="form-control" name="degree" th:field="${app.degree}" placeholder="degree"/>
                         <input type="text" class="form-control" name="skills" th:field="${app.skills}" placeholder="skills"/>
                         <input type="text" class="form-control" name="yrsExperience" th:field="${app.yrsExperience}" placeholder="years experience"/>
                         <input type="hidden" name="userName" th:value="${user.userName}"/>
+>>>>>>> b4d43a0a8cae77132d0104d08731eb36fd7b8752
                         <input type="submit" value="save" class="btn btn-success btn-block"/>
                     </form>
                 </div>
