@@ -4,18 +4,18 @@
     <th:block th:replace="base :: head"></th:block>
     <style>
         .well {
-            height: 500px;
+            height: 550px;
             overflow-y: scroll;
         }
     </style>
 </head>
 <body>
 <th:block th:replace="base :: navbar">nav error</th:block>
-<div class=""><!-- to make this a container or not to make this a container? -->
+<div class="container"><!-- to make this a container or not to make this a container? -->
 
     <div class="row">
 
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="well">
                 <h4>Students</h4>
                 <table class="table table-hover">
@@ -39,7 +39,7 @@
                 </table>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="well">
                 <h4>Boot Camps</h4>
                 <table class="table table-hover">
@@ -61,14 +61,14 @@
                                 <th:block th:case="enabled">
                                     <td>
                                         <a th:href="@{'/disable/' + ${c.bootcampId}}">
-                                            <button class="btn btn-sm btn-danger">disable</button>
+                                            <button class="btn btn-sm btn-danger">yes click to disable</button>
                                         </a>
                                     </td>
                                 </th:block>
                                 <th:block th:case="disabled">
                                     <td>
                                         <a th:href="@{'/enable/' + ${c.bootcampId}}">
-                                            <button class="btn btn-sm btn-success">enable</button>
+                                            <button class="btn btn-sm btn-success">no click to enable</button>
                                         </a>
                                     </td>
                                 </th:block>
