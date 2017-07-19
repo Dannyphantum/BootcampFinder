@@ -129,6 +129,13 @@ public class HomeController {
         return "redirect:/";
     }
 
+    @RequestMapping("/view/{userName}")
+    public String viewStudent(Model model, @PathVariable("userName") String userName) {
+        model.addAttribute("user", userRepository.findOneByUserName(userName));
+        model.addAttribute("app", appRepository.findOneByUserName(userName));
+        return "viewstudent";
+    }
+
 
 /*
     @RequestMapping(value = "/search", method = RequestMethod.POST)
@@ -216,6 +223,5 @@ public class HomeController {
         }
         return "login";
     }
-
 
 }

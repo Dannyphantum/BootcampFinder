@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org " xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:replace="base :: head"></th:block>
+</head>
+<body>
+<th:block th:replace="base :: navbar">nav error</th:block>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="well">
+                <h3>student details</h3>
+                <p th:text="${user.fullName}">fullName error</p>
+                <p th:text="${user.userName}">userName error</p>
+                <p th:text="${user.email}">email error</p>
+                <p>
+                    <th:block th:text="${user.street}">street error</th:block>
+                    <th:block th:text="${user.city}">city error</th:block>
+                    <th:block th:text="${user.state}">state error</th:block>
+                    <th:block th:text="${user.zip}">zip error</th:block>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="well">
+                <h3>Application</h3>
+                <p>
+                    <p>years of experence:</p>
+                    <th:block th:text="${app.yrsExperience}">yearsEx error</th:block>
+                </p>
+                <p>
+                    <p>skills:</p>
+                    <th:block th:text="${app.skills}">skills error</th:block>
+                </p>
+                <p>
+                    <p>degree:</p>
+                    <th:block th:text="${app.degree}">degree error</th:block>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
