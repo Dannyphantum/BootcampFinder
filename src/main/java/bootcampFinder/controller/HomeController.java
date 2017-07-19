@@ -72,9 +72,41 @@ public class HomeController {
     return "login";
 }
 
-    @RequestMapping("/search")
+    /*@RequestMapping("/search")
     public String gosearch(){
         return "base";
+    }*/
+    
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+public String newSearch(Model model){
+        model.addAttribute("bootcamp",new Bootcamp());
+        return "search";
+}
+
+@RequestMapping(value = "/search", method = RequestMethod.POST)
+    public String searchPost(@RequestParam("zipCode") Long zipcode, @ModelAttribute Bootcamp bootcamp, Model model){
+    long   min=zipcode -100;
+    long   max = zipcode+100;
+      /*  long min = bootcamp.getZipCode() - 1;
+        long max = bootcamp.getZipCode() + 1;*/
+        List<Bootcamp> zipList = new ArrayList<>();
+
+        for(long i=min;i<=max;i++){
+            List<Bootcamp> custList = bootcampRepository.findByZipCode(i);
+            zipList.addAll(custList);
+        }
+        model.addAttribute("NewZipList",zipList);
+        return "searchdisplay";
+    }
+
+    @RequestMapping(value = "/bootcamp/{id}", method = RequestMethod.GET)
+    public String bootcamps(@PathVariable("id") long id, Model model, Bootcamp bootcamp){
+        model.addAttribute("customer", new Bootcamp());
+        model.addAttribute("user", new User());
+        model.addAttribute("testimonal", new Testimonial());
+        bootcamp = bootcampRepository.findByBootcampId(bootcamp.getBootcampId());
+        model.addAttribute("bootlisting",bootcamp);
+        return "displaybootcamp";
     }
 
     @RequestMapping("/saveApp")
