@@ -28,24 +28,24 @@ public class HomeController {
     private MessageRepository messageRepository;            private RoleRepository roleRepository;
     private TestimonialRepository testimonialRepository;    private UserRepository userRepository;
     private UserValidator userValidator;                    private UserService userService;
+    private RequestRepository requestRepository;
 
     @Autowired
     public HomeController(AppRepository appRepository, BootcampRepository bootcampRepository
             , MessageRepository messageRepository, UserService userService, RoleRepository roleRepository
-            , TestimonialRepository testimonialRepository, UserRepository userRepository, UserValidator userValidator) {
+            , TestimonialRepository testimonialRepository, UserRepository userRepository
+            , UserValidator userValidator, RequestRepository requestRepository) {
         this.appRepository = appRepository;                 this.bootcampRepository = bootcampRepository;
         this.messageRepository = messageRepository;         this.roleRepository = roleRepository;
         this.testimonialRepository = testimonialRepository; this.userRepository = userRepository;
         this.userValidator = userValidator;                 this.userService = userService;
+        this.requestRepository = requestRepository;
     }
 
     @RequestMapping("/")
     public String home(Model model, Principal principal) {
         User user = userRepository.findOneByUserName(principal.getName());
         model.addAttribute("user", user);
-
-        //System.out.println(user.getUserName());
-        //System.out.println(user.getPassword());
 
         if (user.getRole().equals("student")) {
             if (appRepository.existsByUserName(user.getUserName()))
@@ -55,8 +55,12 @@ public class HomeController {
             if (bootcampRepository.existsByBootcampDirector(user.getUserName()))
                 model.addAttribute("camp", bootcampRepository.findOneByBootcampDirector(user.getUserName()));
             else model.addAttribute("camp", new Bootcamp());
+        } else if (user.getRole().equals("admin")) {
+            model.addAttribute("apps", appRepository.findAll());
+            model.addAttribute("camps", bootcampRepository.findAll());
+            model.addAttribute("requests", requestRepository.findAll());
+            return "adminhome";
         }
-
         model.addAttribute("messages", messageRepository.findAllByRecieverId(user.getUserId()));
         return "home";
     }
