@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org " xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head th:replace="base :: head">
+</head>
+<body>
+<nav class="navbar navbar-default" th:replace="base::navbar"> </nav>
+
+<div class="container">
+    <div class="well">
+
+        <!-- title -->
+        <center><h1 th:text="${message.title}">title error</h1></center>
+        <!-- title -->
+
+        <!-- message -->
+        <div class="well" th:text="${message.content}">content error</div>
+        <!-- message -->
+
+        <!-- buttons for director only -->
+        <div class="well" sec:authorize="hasAuthority('DIRECTOR')" >
+            <a th:href="@{'/accept/' + ${message.sender} }">
+                <button class="btn btn-success btn-block">
+                    accept <th:block th:text="${message.sender}"></th:block>
+                </button>
+            </a>
+            <br/><br/>
+            <a th:href="@{'/reject/' + ${message.sender} }">
+                <button class="btn btn-danger btn-block">
+                    reject <th:block th:text="${message.sender}"></th:block>
+                </button>
+            </a>
+        </div>
+        <!-- buttons for director only -->
+
+    </div>
+</div>
+
+
+</body>
+</html>

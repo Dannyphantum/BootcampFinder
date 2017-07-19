@@ -39,6 +39,16 @@ public class HomeController {
         this.requestRepository = requestRepository;
     }
 
+    @RequestMapping("/viewMessage/{id}")
+    public String viewmessage(Model model, Principal principal, @PathVariable("id") long id) {
+        User user = userRepository.findOneByUserName(principal.getName());
+        if (messageRepository.findOne(id).getRecieverId() == user.getUserId()) {
+            model.addAttribute("message", messageRepository.findOne(id));
+            return "viewmessage";
+        }
+        return "redirect:/";
+    }
+
     @RequestMapping("/")
     public String home(Model model, Principal principal) {
         User user = userRepository.findOneByUserName(principal.getName());
@@ -61,24 +71,13 @@ public class HomeController {
         model.addAttribute("messages", messageRepository.findAllByRecieverId(user.getUserId()));
         return "home";
     }
-/*
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String getlogin(Model model) {
-        model.addAttribute("action", "login");
-        return "login";
-    }
-*/
+
     @RequestMapping("/login")
     public String login(Model model) {
     model.addAttribute("action", "login");
     return "login";
 }
 
-    /*@RequestMapping("/search")
-    public String gosearch(){
-        return "base";
-    }*/
-    
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String newSearch(Model model){
         model.addAttribute("bootcamp",new Bootcamp());
@@ -103,6 +102,48 @@ public class HomeController {
             testimonialRepository.save(testimonial);
         }
 
+        return "redirect:/";
+    }
+
+    @RequestMapping("/reject/{userName}")
+    public String reject(@PathVariable("userName") String userName, Principal principal) {
+        User director = userRepository.findOneByUserName(principal.getName());
+        for (Request req : requestRepository.findAllByStudent(userName))
+            if (req.getCamp().equals(director.getUserName())) {
+                req.setStatus("rejected");
+                requestRepository.save(req);
+                Message message = new Message();
+                message.setContent(director.getUserName() + " rejected your application");
+                message.setSender(director.getUserName());
+                message.setTitle("app rejected!");
+                message.setRecieverId(userRepository.findByUserName(userName).getUserId());
+                messageRepository.save(message);
+                for (Message msg : messageRepository.findAllByRecieverId(director.getUserId()))
+                    if (msg.getSender().equals(userName))
+                        messageRepository.delete(msg);
+            }
+        return "redirect:/";
+    }
+
+    @RequestMapping("/accept/{userName}")
+    public String accept(@PathVariable("userName") String userName, Principal principal) {
+        User director = userRepository.findOneByUserName(principal.getName());
+        for (Request req : requestRepository.findAllByStudent(userName))
+            if (req.getCamp().equals(director.getUserName())) {
+                req.setStatus("accepted");
+                requestRepository.save(req);
+                Message message = new Message();
+                message.setContent(director.getUserName() + " accepted your application");
+                message.setSender(director.getUserName());
+                message.setTitle("app accepted!");
+                message.setRecieverId(userRepository.findByUserName(userName).getUserId());
+                messageRepository.save(message);
+
+                for (Message msg : messageRepository.findAllByRecieverId(director.getUserId()))
+                    if (msg.getSender().equals(userName))
+                        messageRepository.delete(msg);
+
+            }
         return "redirect:/";
     }
 
@@ -131,7 +172,6 @@ public class HomeController {
         for (Bootcamp camp : bootcampRepository.findAllByTopicsContaining(search.getBootcampName()))
             if (camp.getEnabled().equals("enabled"))
                 camps.add(camp);
-
         //remove duplicates
         for (int i = camps.size() -1; i > -1; i--)
             for (int j = camps.size() -1; j > -1; j--)
@@ -139,7 +179,6 @@ public class HomeController {
                     camps.remove(i);
                     j = -1;
                 }
-
         model.addAttribute("camps", camps);
         return "search";
     }
@@ -191,49 +230,13 @@ public class HomeController {
         return "viewstudent";
     }
 
-
-/*
-    @RequestMapping(value = "/search", method = RequestMethod.POST)
-    public String searchPost(@RequestParam("zipCode") Long zipcode, @ModelAttribute Bootcamp bootcamp, Model model){
-    long   min = zipcode - 100;
-    long   max = zipcode + 100;
-      /*  long min = bootcamp.getZipCode() - 1;
-        long max = bootcamp.getZipCode() + 1;*/ /*
-        List<Bootcamp> zipList = new ArrayList<>();
-
-        for(long i = min; i <= max; i++){
-            List<Bootcamp> custList = bootcampRepository.findByZipCode(i);
-            zipList.addAll(custList);
-        }
-        model.addAttribute("NewZipList",zipList);
-        return "searchdisplay";
-    }
-
-    @RequestMapping(value = "/bootcamp/{id}", method = RequestMethod.GET)
-    public String bootcamps(@PathVariable("id") long id, Model model, Bootcamp bootcamp){
-
-        model.addAttribute("customer", new Bootcamp());
-        model.addAttribute("user", new User());
-        model.addAttribute("testimonal", new Testimonial());
-
-        List<Testimonial> testimonials = new ArrayList<>();
-        testimonials.addAll(Arrays.asList(testimonialRepository.findAllByBootcampId(id)));
-        model.addAttribute("testimonals", testimonials);
-
-        bootcamp = bootcampRepository.findByBootcampId(bootcamp.getBootcampId());
-        model.addAttribute("bootlisting",bootcamp);
-        return "displaybootcamp";
-    }
-*/
     @RequestMapping("/saveApp")
     public String saveApp(@ModelAttribute App app, Principal principal) {
         User user = userRepository.findOneByUserName(principal.getName());
-
         if (appRepository.existsByUserName(user.getUserName())) {
             long id = appRepository.findOneByUserName(user.getUserName()).getAppId();
             app.setAppId(id);
         }
-
         appRepository.save(app);
         return "redirect:/";
     }
@@ -241,7 +244,6 @@ public class HomeController {
     @RequestMapping("/saveCamp")
     public String saveCamp(@ModelAttribute Bootcamp bootcamp, Principal principal) {
         User user = userRepository.findOneByUserName(principal.getName());
-
         if (bootcampRepository.existsByBootcampDirector(user.getUserName())) {
             Bootcamp temp = bootcampRepository.findOneByBootcampDirector(user.getUserName());
             bootcamp.setBootcampId(temp.getBootcampId());
