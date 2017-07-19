@@ -8,4 +8,5 @@ import bootcampFinder.models.Testimonial;
 import org.springframework.data.repository.CrudRepository;
 
 public interface TestimonialRepository extends CrudRepository<Testimonial, Long> {
+    Testimonial[] findAllByBootcampId(long id);
 }
