@@ -57,7 +57,10 @@
 
                             <li><a href="/logout" sec:authorize="isAuthenticated()"><h3>Logout</h3></a></li>
 
-                                <li><a href="/search" ><h3>Search</h3></a></li>
+                                <li><a href="/search" sec:authorize="hasAuthority('STUDENT')"><h3>Search</h3></a></li>
+                                  <li><a href="/search" sec:authorize="hasAuthority('ADMIN')"><h3>Search</h3></a></li>
+
+
 
 
                     </ul>
