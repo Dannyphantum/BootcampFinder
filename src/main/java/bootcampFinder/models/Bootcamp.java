@@ -31,9 +31,15 @@ public class Bootcamp {
 
     private String bootcampDirector;
 
+    private String enabled;
 
+    public String getEnabled() {
+        return enabled;
+    }
 
-
+    public void setEnabled(String enabled) {
+        this.enabled = enabled;
+    }
 
     public long getBootcampId() {
         return bootcampId;
@@ -115,6 +121,7 @@ public class Bootcamp {
         zipCode  ="please give a zip code";
         topics = "please add topics";
         description = "please add a description";
+        enabled = "disabled";
         this.bootcampDirector = bootcampDirector;
     }
 

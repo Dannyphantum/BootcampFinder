@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org " xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:replace="base :: head"></th:block>
+    <style>
+        .well {
+            height: 500px;
+            overflow-y: scroll;
+        }
+    </style>
+</head>
+<body>
+<th:block th:replace="base :: navbar">nav error</th:block>
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <div class="well">
+                <h4>Students</h4>
+                <table class="table table-hover">
+
+                    <thead>
+                        <th>User Name</th>
+                        <th>View User</th>
+                    </thead>
+
+                    <th:block th:each="a : ${apps}">
+                        <tr>
+                            <td th:text="a.userName">userName error</td>
+                            <td>
+                                <a th:href="@{'/vew/' + ${a.userName}}">
+                                    <button class="btn btn-sm btn-info">view</button>
+                                </a>
+                            </td>
+                        </tr>
+                    </th:block>
+
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="well">
+                <h4>Boot Camps</h4>
+                <table class="table table-hover">
+                    <thead>
+                        <th>Camp Name</th>
+                        <th>View Boot Camp</th>
+                        <th>Enabled?</th>
+                    </thead>
+
+                    <th:block th:each="c : ${camps}">
+                        <tr>
+                            <td th:text="c.bootcampName">bootcameName error</td>
+                            <td>
+                                <a th:href="@{'/bootcamp/' + ${c.bootcampId}}">
+                                    <button class="btn btn-sm btn-info">view</button>
+                                </a>
+                            </td>
+                            <th:block th:switch="${c.enabled}">
+                                <th:block th:case="enabled">
+                                    <td>
+                                        <a th:href="@{'/disable/' + ${c.bootcampId}}">
+                                            <button class="btn btn-sm btn-danger">disable</button>
+                                        </a>
+                                    </td>
+                                </th:block>
+                                <th:block th:case="disabled">
+                                    <td>
+                                        <a th:href="@{'/enable/' + ${c.bootcampId}}">
+                                            <button class="btn btn-sm btn-success">enable</button>
+                                        </a>
+                                    </td>
+                                </th:block>
+                            </th:block>
+                        </tr>
+                    </th:block>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="well">
+                <h4>Requests</h4>
+                <table class="table table-hover">
+                    <thead>
+                        <th>Student</th>
+                        <th>Boot Camp</th>
+                        <th>Status</th>
+                    </thead>
+                    <th:block th:each="r : ${requests}">
+                        <tr>
+                            <td th:text="r.student"></td>
+                            <td th:text="r.camp"></td>
+                            <td th:text="r.status"></td>
+                        </tr>
+                    </th:block>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

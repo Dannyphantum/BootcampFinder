@@ -84,12 +84,35 @@ public class HomeController {
         return "search";
 }
 
+
+
+    @RequestMapping("/search")
+    private String search(Model model) {
+        model.addAttribute("bootcamp", new Bootcamp());
+        model.addAttribute("camps", new ArrayList<Bootcamp>());
+        return "search";
+    }
+    @RequestMapping("/searchTerm")
+    private String searchTerm(Model model, Bootcamp search) {
+        model.addAttribute("bootcamp", new Bootcamp());
+        List<Bootcamp> camps =  new ArrayList<>();
+        camps.addAll(bootcampRepository.findAllByDescriptionContaining(search.getBootcampName()));
+        for (Bootcamp camp : bootcampRepository.findAllByTopicsContaining(search.getBootcampName()))
+            for(Bootcamp boot : camps)
+                if (!camp.getBootcampDirector().equals(boot.getBootcampDirector()))
+                    camps.add(camp);
+        model.addAttribute("camps", new ArrayList<Bootcamp>());
+        return "search";
+    }
+
+
+/*
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     public String searchPost(@RequestParam("zipCode") Long zipcode, @ModelAttribute Bootcamp bootcamp, Model model){
     long   min = zipcode - 100;
     long   max = zipcode + 100;
       /*  long min = bootcamp.getZipCode() - 1;
-        long max = bootcamp.getZipCode() + 1;*/
+        long max = bootcamp.getZipCode() + 1;*/ /*
         List<Bootcamp> zipList = new ArrayList<>();
 
         for(long i = min; i <= max; i++){
@@ -115,7 +138,7 @@ public class HomeController {
         model.addAttribute("bootlisting",bootcamp);
         return "displaybootcamp";
     }
-
+*/
     @RequestMapping("/saveApp")
     public String saveApp(@ModelAttribute App app, Principal principal) {
         User user = userRepository.findOneByUserName(principal.getName());

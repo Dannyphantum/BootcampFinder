@@ -7,6 +7,7 @@ package bootcampFinder.repositories;
 import bootcampFinder.models.Bootcamp;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface BootcampRepository extends CrudRepository<Bootcamp, Long> {
@@ -16,4 +17,8 @@ public interface BootcampRepository extends CrudRepository<Bootcamp, Long> {
     Bootcamp findByBootcampId(long bootcampId);
 
     List<Bootcamp> findByZipCode(long i);
+
+    List<Bootcamp> findAllByDescriptionContaining(String search);
+
+    Bootcamp[] findAllByTopicsContaining(String bootcampName);
 }
