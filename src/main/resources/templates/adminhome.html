@@ -11,7 +11,7 @@
 </head>
 <body>
 <th:block th:replace="base :: navbar">nav error</th:block>
-<div class="container">
+<div class=""><!-- to make this a container or not to make this a container? -->
 
     <div class="row">
 
@@ -27,9 +27,9 @@
 
                     <th:block th:each="a : ${apps}">
                         <tr>
-                            <td th:text="a.userName">userName error</td>
+                            <td th:text="${a.userName}">userName error</td>
                             <td>
-                                <a th:href="@{'/vew/' + ${a.userName}}">
+                                <a th:href="@{'/view/' + ${a.userName}}">
                                     <button class="btn btn-sm btn-info">view</button>
                                 </a>
                             </td>
@@ -51,7 +51,7 @@
 
                     <th:block th:each="c : ${camps}">
                         <tr>
-                            <td th:text="c.bootcampName">bootcameName error</td>
+                            <td th:text="${c.bootcampName}">bootcameName error</td>
                             <td>
                                 <a th:href="@{'/bootcamp/' + ${c.bootcampId}}">
                                     <button class="btn btn-sm btn-info">view</button>
