@@ -107,6 +107,15 @@ public class HomeController {
         for (Bootcamp camp : bootcampRepository.findAllByTopicsContaining(search.getBootcampName()))
             if (camp.getEnabled().equals("enabled"))
                 camps.add(camp);
+
+        //remove duplicates
+        for (int i = camps.size() -1; i > -1; i--)
+            for (int j = camps.size() -1; j > -1; j--)
+                if (camps.get(j).getBootcampId() == camps.get(i).getBootcampId() && i != j) {
+                    camps.remove(i);
+                    j = -1;
+                }
+
         model.addAttribute("camps", camps);
         return "search";
     }
