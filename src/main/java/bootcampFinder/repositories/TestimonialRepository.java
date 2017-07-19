@@ -7,6 +7,10 @@ package bootcampFinder.repositories;
 import bootcampFinder.models.Testimonial;
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.ArrayList;
+
 public interface TestimonialRepository extends CrudRepository<Testimonial, Long> {
     Testimonial[] findAllByBootcampId(long id);
+
+    ArrayList<Testimonial> findAllByStudent(String name);
 }

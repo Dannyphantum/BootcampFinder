@@ -85,13 +85,23 @@ public class HomeController {
         return "search";
 }
     @RequestMapping(value="/testimonial/{id}", method = RequestMethod.POST)
-    public String viewBootCampPost(Model model, @PathVariable("id") long id, @RequestParam ("message") String message, Principal principal) {
-        model.addAttribute("bootcamp", bootcampRepository.findOne(id));
-        Testimonial testimonial= new Testimonial();
-        testimonial.setMessage(message);
-        testimonial.setBootcampId(id);
-        testimonial.setUserName(principal.getName());
-        testimonialRepository.save(testimonial);
+    public String viewBootCampPost(Model model, @PathVariable("id") long id
+            , @RequestParam ("message") String message, Principal principal) {
+        ArrayList<Testimonial> userTests = testimonialRepository.findAllByStudent(principal.getName());
+
+        boolean hasTest = false;
+        for (Testimonial test : userTests)
+            if (test.getBootcampId() == id)
+                hasTest = true;
+
+        if (!hasTest && userRepository.findOneByUserName(principal.getName()).getRole().equals("student")) {
+            model.addAttribute("bootcamp", bootcampRepository.findOne(id));
+            Testimonial testimonial = new Testimonial();
+            testimonial.setMessage(message);
+            testimonial.setBootcampId(id);
+            testimonial.setUserName(principal.getName());
+            testimonialRepository.save(testimonial);
+        }
 
         return "redirect:/";
     }
